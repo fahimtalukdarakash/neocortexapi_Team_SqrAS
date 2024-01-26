@@ -1,6 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+<<<<<<< HEAD
     <TargetFramework>net8.0</TargetFramework>
+=======
+    <TargetFramework>net7.0</TargetFramework>
+>>>>>>> 2537ea416cd7312144c41fee52ad5631f821ee10
   </PropertyGroup>
   <ItemGroup>
     <None Remove="NumSharp" />
