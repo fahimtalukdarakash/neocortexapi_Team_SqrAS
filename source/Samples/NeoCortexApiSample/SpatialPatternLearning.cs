@@ -78,10 +78,7 @@ namespace NeoCortexApiSample
             {
                 inputValues.Add((double)i);
             }
-            //for (int i = 50; i < 100; i++)
-            //{
-            //    inputValues.Add((double)i);
-            //}
+          
 
             var sp = RunExperiment(cfg, encoder, inputValues);
 
@@ -171,7 +168,19 @@ namespace NeoCortexApiSample
             // Learning process will take 1000 iterations (cycles)
             int maxSPLearningCycles = 1000;
 
-            int numStableCycles = 0;
+            // int numStableCycles = 0;
+            Dictionary<double, List<int[]>> inputofSDRspercycle = new Dictionary<double, List<int[]>>();
+            foreach (var input in inputs)
+            {
+                inputofSDRspercycle[input] = new List<int[]>();
+            }
+            bool SDRofallinputs = false;
+            Dictionary<double, int> a = new Dictionary<double, int>();
+            int lengthoftotalinputs = inputs.Length;
+            int minimumArray = 0;
+            int countForCycle = 0;
+            int minimumArrayNeededToBreakTheCycle = 100;
+            bool c = false;
 
             for (int cycle = 0; cycle < maxSPLearningCycles; cycle++)
             {
