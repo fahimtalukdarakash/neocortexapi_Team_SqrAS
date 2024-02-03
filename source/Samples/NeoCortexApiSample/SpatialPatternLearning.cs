@@ -214,7 +214,37 @@ namespace NeoCortexApiSample
                     prevActiveCols[input] = activeColumns;
                     prevSimilarity[input] = similarity;
                 }
+                foreach (var input in inputofSDRspercycle)
+                {
+                    if (SDRofallinputs == false)
+                    {
+                        double i = input.Key;
+                        List<int[]> values = input.Value;
+                        foreach (var SDRarray in values)
+                        {
+                            if (SDRarray.Length == 0)
+                            {
+                                a[i] = 0;
+                            }
+                            else
+                            {
+                                a[i] = 1;
+                            }
+                            //Console.WriteLine($"{i} : {Helpers.StringifyVector(SDRarray)}");
+                        }
+                    }
+                    else
+                    {
+                        minimumArray++;
+                        if (minimumArray == 2)
+                        {
+                            Console.WriteLine("all input have minimum 2 arrays");
+                        }
+                        Console.WriteLine("full SDR of inputs done");
+                        break;
+                    }
 
+                }
                 if (isInStableState)
                 {
                     numStableCycles++;
