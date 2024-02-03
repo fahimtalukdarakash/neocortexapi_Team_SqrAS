@@ -245,6 +245,14 @@ namespace NeoCortexApiSample
                     }
 
                 }
+                int count = 0;
+                foreach (var b in a)
+                {
+                    if (b.Value == 1)
+                    {
+                        count++;
+                    }
+                }
                 if (isInStableState)
                 {
                     numStableCycles++;
