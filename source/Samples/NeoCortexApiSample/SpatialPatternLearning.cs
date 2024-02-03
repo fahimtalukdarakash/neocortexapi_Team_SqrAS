@@ -253,6 +253,11 @@ namespace NeoCortexApiSample
                         count++;
                     }
                 }
+                if (count == lengthoftotalinputs)
+                {
+                    SDRofallinputs = true;
+                    //Console.WriteLine("full SDR of inputs done");
+                }
                 if (isInStableState)
                 {
                     numStableCycles++;
