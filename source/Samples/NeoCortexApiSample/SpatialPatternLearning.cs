@@ -258,13 +258,18 @@ namespace NeoCortexApiSample
                     SDRofallinputs = true;
                     //Console.WriteLine("full SDR of inputs done");
                 }
-                if (isInStableState)
+                Console.WriteLine(countForCycle);
+                if (countForCycle == minimumArrayNeededToBreakTheCycle)
+                {
+                    break;
+                }
+                /*if (isInStableState)
                 {
                     numStableCycles++;
                 }
 
                 if (numStableCycles > 5)
-                    break;
+                    break;*/
             }
 
             return sp;
