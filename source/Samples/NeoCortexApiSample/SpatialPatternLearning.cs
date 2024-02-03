@@ -206,6 +206,11 @@ namespace NeoCortexApiSample
 
                     Debug.WriteLine($"[cycle={cycle.ToString("D4")}, i={input}, cols=:{actCols.Length} s={similarity}] SDR: {Helpers.StringifyVector(actCols)}");
 
+                    if (isInStableState == true)
+                    {
+                        inputofSDRspercycle[input].Add(actCols);
+                    }
+
                     prevActiveCols[input] = activeColumns;
                     prevSimilarity[input] = similarity;
                 }
