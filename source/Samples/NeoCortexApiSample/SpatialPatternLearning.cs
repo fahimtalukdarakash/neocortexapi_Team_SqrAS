@@ -258,6 +258,18 @@ namespace NeoCortexApiSample
                     SDRofallinputs = true;
                     //Console.WriteLine("full SDR of inputs done");
                 }
+                if (SDRofallinputs == true && minimumArray >= 2)
+                {
+
+                    foreach (var input in inputofSDRspercycle)
+                    {
+                        double i = input.Key;
+                        List<int[]> values = input.Value;
+                        int lengthOfList = values.Count;
+                        int[] array1 = values[lengthOfList - 1];
+                        int[] array2 = values[lengthOfList - 2];
+                    }
+                }
                 Console.WriteLine(countForCycle);
                 if (countForCycle == minimumArrayNeededToBreakTheCycle)
                 {
