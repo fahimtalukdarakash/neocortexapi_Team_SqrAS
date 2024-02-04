@@ -268,7 +268,35 @@ namespace NeoCortexApiSample
                         int lengthOfList = values.Count;
                         int[] array1 = values[lengthOfList - 1];
                         int[] array2 = values[lengthOfList - 2];
+
+                        if (array1.Length == array2.Length)
+                        {
+                            Console.WriteLine($"{i} : {Helpers.StringifyVector(array1)}....{array1.Length}");
+                            Console.WriteLine($"{i} : {Helpers.StringifyVector(array2)}....{array2.Length}");
+                            for (int j = 0; j < array1.Length; j++)
+                            {
+                                if (array1[j] == array2[j])
+                                {
+                                    if (j == array1.Length - 1)
+                                    {
+                                        c = true;
+                                    }
+                                }
+                                else
+                                {
+                                    c = false;
+                                    break;
+                                }
+                            }
+                            if (c == false) break;
+                        }
+                        else
+                        {
+                            c = false;
+                            break;
+                        }
                     }
+                    
                 }
                 Console.WriteLine(countForCycle);
                 if (countForCycle == minimumArrayNeededToBreakTheCycle)
