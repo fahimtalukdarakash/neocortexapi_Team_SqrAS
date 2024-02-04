@@ -296,7 +296,14 @@ namespace NeoCortexApiSample
                             break;
                         }
                     }
-                    
+                    if (c == true)
+                    {
+                        countForCycle++;
+                    }
+                    else
+                    {
+                        countForCycle = 0;
+                    }
                 }
                 Console.WriteLine(countForCycle);
                 if (countForCycle == minimumArrayNeededToBreakTheCycle)
