@@ -169,6 +169,8 @@ namespace NeoCortexApiSample
             int maxSPLearningCycles = 1000;
 
             // int numStableCycles = 0;
+
+            //Dictionary Initialization && Value Initialization
             Dictionary<double, List<int[]>> inputofSDRspercycle = new Dictionary<double, List<int[]>>();
             foreach (var input in inputs)
             {
