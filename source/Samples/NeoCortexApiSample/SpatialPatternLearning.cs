@@ -220,6 +220,7 @@ namespace NeoCortexApiSample
                 }
                 foreach (var input in inputofSDRspercycle)
                 {
+                    //Checking all the input has SDR or not.
                     if (SDRofallinputs == false)
                     {
                         double i = input.Key;
