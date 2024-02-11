@@ -240,6 +240,7 @@ namespace NeoCortexApiSample
                     }
                     else
                     {
+                        //Checking if every input has array or not.
                         minimumArray++;
                         if (minimumArray == 2)
                         {
