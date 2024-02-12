@@ -246,7 +246,7 @@ namespace NeoCortexApiSample
                         {
                             Console.WriteLine("all input have minimum 2 arrays");
                         }
-                        Console.WriteLine("full SDR of inputs done");
+                        Console.WriteLine("full SDR of inputs are done");
                         break;
                     }
 
