@@ -251,6 +251,16 @@ namespace NeoCortexApiSample
                     }
 
                 }
+                if(SDRofallinputs == true && isInStableState == false)
+                {
+                    foreach (var input in inputofSDRspercycle)
+                    {
+                        double i = input.Key;
+                        List<int[]> values = input.Value;
+                        values.Clear();
+                        a[i] = 0;
+                    }
+                }
                 int count = 0;
                 foreach (var b in a)
                 {
