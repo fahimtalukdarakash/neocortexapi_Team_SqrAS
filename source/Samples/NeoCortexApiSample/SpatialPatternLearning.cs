@@ -334,6 +334,12 @@ namespace NeoCortexApiSample
                 if (numStableCycles > 5)
                     break;*/
             }
+            foreach (var input in inputofSDRspercycle)
+            {
+                double i = input.Key;
+                List<int[]> values = input.Value;
+                Debug.WriteLine($"{i} : {Helpers.StringifyVector(values[values.Count - 1])}");
+            }
 
             return sp;
         }
