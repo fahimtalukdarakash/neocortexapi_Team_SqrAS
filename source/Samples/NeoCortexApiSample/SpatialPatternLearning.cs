@@ -272,7 +272,7 @@ namespace NeoCortexApiSample
                 if (count == lengthoftotalinputs)
                 {
                     SDRofallinputs = true;
-                    //Console.WriteLine("full SDR of inputs done");
+                    //Console.WriteLine("full SDR of input done");
                 }
                 if (SDRofallinputs == true && minimumArray >= 2)
                 {
