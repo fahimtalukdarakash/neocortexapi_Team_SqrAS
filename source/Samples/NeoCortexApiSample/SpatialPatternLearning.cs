@@ -69,8 +69,7 @@ namespace NeoCortexApiSample
 
 
             EncoderBase encoder = new ScalarEncoder(settings);
-
-            //
+                       
             // We create here 100 random input values.
             List<double> inputValues = new List<double>();
 
@@ -184,6 +183,8 @@ namespace NeoCortexApiSample
             int minimumArrayNeededToBreakTheCycle = 100;
             bool c = false;
 
+            // To take the value of the dictionary, in which cycle program will break
+            int cycle2 = 0;
             for (int cycle = 0; cycle < maxSPLearningCycles; cycle++)
             {
                 Debug.WriteLine($"Cycle  ** {cycle} ** Stability: {isInStableState}");
@@ -260,6 +261,11 @@ namespace NeoCortexApiSample
                         values.Clear();
                         a[i] = 0;
                     }
+                    //When the program is in Stable state and then again turns into false 
+                    //then we reset all the values so that the values can again start from the beginning
+                    SDRofallinputs = false;
+                    minimumArray = 0;
+                    countForCycle = 0;
                 }
                 int count = 0;
                 foreach (var b in a)
@@ -322,8 +328,11 @@ namespace NeoCortexApiSample
                     }
                 }
                 Console.WriteLine(countForCycle);
+                
+                //When the cycle count match with given minimum number of cycles then the program will break
                 if (countForCycle == minimumArrayNeededToBreakTheCycle)
-                {
+                {                    
+                    cycle2 = cycle;
                     break;
                 }
                 /*if (isInStableState)
