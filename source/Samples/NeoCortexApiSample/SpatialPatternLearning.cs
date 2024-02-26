@@ -347,23 +347,21 @@ namespace NeoCortexApiSample
             {
                 double i = input.Key;
                 List<int[]> values = input.Value;
+                int cycle = cycle2;
                 Debug.WriteLine($"input:{i}");
                 foreach (var SDRarray in values)
                 {
-                    foreach (var val in SDRarray)
-                    {
-                        Debug.Write($"{val} ");
-                    }
-                    Debug.WriteLine("");
+                    Debug.WriteLine($"cycle {cycle}:{Helpers.StringifyVector(SDRarray)}");
+                    cycle--;
                 }
             }
+            Debug.WriteLine("Final SDR of all inputs");
             foreach (var input in inputofSDRspercycle)
             {
                 double i = input.Key;
                 List<int[]> values = input.Value;
                 Debug.WriteLine($"{i} : {Helpers.StringifyVector(values[values.Count - 1])}");
             }
-
             return sp;
         }
 
