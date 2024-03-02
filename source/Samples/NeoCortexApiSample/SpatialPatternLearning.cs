@@ -207,8 +207,8 @@ namespace NeoCortexApiSample
 
                     similarity = MathHelpers.CalcArraySimilarity(activeColumns, prevActiveCols[input]);
 
-                    Debug.WriteLine($"[cycle={cycle.ToString("D4")}, i={input}, cols=:{actCols.Length} s={similarity}] SDR: {Helpers.StringifyVector(actCols)}");
-                   
+                    Debug.WriteLine($"[cycle={cycle.ToString("D4")}, N={countForCycle}, i={input}, cols=:{actCols.Length} s={similarity}, stable for {countForCycle} cycles] SDR: {Helpers.StringifyVector(actCols)}");
+
                     //Dictionary, Inpput save if the isInStableState is true
                     //Without the stable value dictionary values will not be saved and shows no value
                     if (isInStableState == true)
