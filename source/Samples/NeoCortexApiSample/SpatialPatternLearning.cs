@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace NeoCortexApiSample
 {
@@ -376,6 +377,38 @@ namespace NeoCortexApiSample
                 List<int[]> values = input.Value;
                 Debug.WriteLine($"{i} : {Helpers.StringifyVector(values[values.Count - 1])}");
             }
+            return sp;
+        }
+        //Run threading experiment with the SpatialPatternLearning Experiment
+        private static SpatialPooler RunExperiment(HtmConfig cfg, EncoderBase encoder, List<double> inputValues)
+        {
+            // ... (rest of the code remains the same until the loop iterating through inputValues)
+
+            // Create tasks for each input value
+            var tasks = inputValues.Select(async input =>
+            {
+                double similarity;
+
+                // Learn the input pattern
+                var lyrOut = cortexLayer.Compute((object)input, true) as int[];
+                var activeColumns = cortexLayer.GetResult("sp") as int[];
+                var actCols = activeColumns.OrderBy(c => c).ToArray();
+
+                similarity = MathHelpers.CalcArraySimilarity(activeColumns, prevActiveCols[input]);
+
+                // ... (rest of the logic within the loop remains the same)
+
+                prevActiveCols[input] = activeColumns;
+                prevSimilarity[input] = similarity;
+
+                return input; // Optional: Return input for further processing
+            }).ToList();
+
+            // Wait for all tasks to finish
+            Task.WaitAll(tasks.ToArray());
+
+            // ... (rest of the code within RunExperiment remains the same)
+
             return sp;
         }
 

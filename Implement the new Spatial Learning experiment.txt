@@ -1,0 +1,124 @@
+﻿Implement the new Spatial Learning experiment
+
+
+Fahim Talukdar
+fahim.talukdar@stud.fra-uas.de
+
+
+Md Ashraf Uddin
+ashraf.uddin@stud.fra-uas.de
+________________
+Nowrin Tasnin Sinthia
+nowrin.sinthia@stud.fra-uas.de
+________________
+A.S.M. Saiem Solimullah
+a.solimullah@stud.fra-uas.de
+
+
+
+
+________________
+
+
+Abstract— Abstract Traditional learning methods often fail to capitalize on the full potential of the human brain's inherent spatial abilities. This paper presents the Spatial Learning experiment, an innovative approach investigating the efficacy of incorporating spatial elements into the learning process. The experiment aims to evaluate the impact of spatial awareness and cognition on knowledge acquisition and retention in the context of [insert specific type of learning].  The study utilizes [briefly describe the methodology used, e.g., surveys, controlled experiments] to compare the learning outcomes of participants exposed to traditional methods and those incorporating spatial elements like [provide examples of spatial elements used, e.g., virtual environments, 3D models].  The results of this experiment hold the potential to revolutionize learning strategies by harnessing the power of spatial learning. By understanding the effectiveness of this approach, we can pave the way for the development of more engaging, efficient, and ultimately successful learning experiences for [target audience].  Keywords: Spatial learning, learning methods, cognitive science, [additional relevant keywords
+1. Introduction 
+The field of learning is constantly evolving, and with it, the way we understand how individuals acquire and utilize knowledge. This experiment marks a significant step forward as we embark on exploring a novel approach: the Spatial Learning experiment. This innovative method delves into the potential of spatial awareness and cognition as key drivers in the learning process.  Through this experiment, we aim to uncover the effectiveness of incorporating spatial elements into traditional learning methods. By placing a greater emphasis on spatial relationships, navigation, and visualization, we hope to enhance the learning experience for participants and shed light on the previously unexplored potential of this approach.  This introduction sets the stage for your experiment by:  Highlighting the advancement: Framing the Spatial Learning experiment as a novel approach within the evolving field of learning. Explaining the core concept: Briefly introducing the concept of "spatial learning" and its focus on spatial awareness and cognition. Outlining the objective: Emphasizing the experiment's goal of evaluating the effectiveness of spatial learning methods. Generating anticipation: Creating excitement for the potential impact of the experiment on the understanding of learning processes. Remember to personalize this introduction further by including:  Specific details about the type of learning targeted by the experiment (e.g., language acquisition, problem-solving) The target audience for the experiment (e.g., students, professionals) Any hypotheses you have about the potential benefits of spatial learning By providing these details, you can create a compelling introduction that effectively engages the reader and sets the stage for a deeper exploration of the Spatial Learning experiment.
+2. LITERATURE SURVEY
+   1. Hierarchical Temporal Memory (HTM)
+
+
+The HTM model learns the procedure that occurs in one cortex of the brain. HTM works on continuous streams of input patterns, attempting to construct rare and constant representations of input sequences based on the input stream's recursive pattern. [1]
+HTM's capacity to forecast future patterns based on previously trained data patterns. After a few cycles, HTM receives a unique pattern that compares the prior patterns to the current pattern. Input patterns should not repeat, and the uniqueness should be maintained. 
+To depict patterns in the incoming data, HTM uses SDRs. Each input pattern is first transformed into an SDR, and the HTM network is then fed this SDR.
+SDRs enable the efficient and effective encoding and processing of complicated and high-dimensional data patterns, which is why they are fundamental to the HTM algorithm.
+
+
+   2. Sparse Distributed representations (SDRs)
+
+
+Sparse Distributed representations (SDRs) of input patterns are used in HTM's language. With a set amount of active bits, it produces SDRs internally. These bits have semantic value. As a result, two inputs with equivalent semantic meaning must have equal active bit representation in SDR, which plays an important role in HTM learning.
+Hierarchical Temporal Memory (HTM) technique is based on the concept of SDRs, which are high-dimensional binary vectors with only a small fraction of the bits set to 1. SDRs are a natural way for the brain to represent patterns because they allow for the efficient storage and processing of large amounts of information.
+
+
+The encoding process is similar to the operations of human and other animal sensory organs.
+
+
+The cochlea, for example, is a specialized mechanism that translates the frequencies and amplitudes of external sounds into a sparse set of activated neurons. The underlying mechanism for this process (Fig. 1) consists of a row of inner hair cells that are responsive to different frequencies. When a specific frequency of sound is heard, the hair cells excite neurons, which send the signal to the brain. The set of neurons that are stimulated in this manner form the Sparse Distributed Representation of the sound.
+
+
+An encoder in an HTM system initially turns a data source into an SDR.To capture the main semantic properties of the material, the encoder selects which output bits should be ones and which should be zeros. SDRs with similar input values should have a high degree of overlap. [3]
+ Diagram
+
+Description automatically generated 
+
+Figure.1: Cochlear hair cells excite a group of neurons based on the frequency of the sound.
+
+
+   3. Encoders
+Encoders should generate SDRs with a constant number of bits 'N' and a fixed number of active (1's) bits 'W', regardless of what they represent. What do you know about the ideal values for N and W?
+To preserve the features of sparsity, we cannot be a large proportion of N. But, if W is too small, we lose the features of a distributed representation.
+While encoding data, there are several unique aspects to consider:
+1. Semantically related data can trigger SDRs with overlapping active bits.
+2. The same input should always provide the same SDR output.
+3. The result will have the same dimensionality as all of the inputs (total number of bits).
+Deterministic encoders should produce the same result from the same input each time. Without this attribute, the sequence learnt in HTM will be redundant because there is a shift in values with encoded representations. Put an end to creating adaptive or random element encoders.
+The output of an encoder must produce the exact same number of bits for each of its inputs. SDRs are compared and handled so that a bit with a specific "value" is always at the same location using a bit-by-bit assumption. If the encoders offered various SDR bit lengths, comparisons and other operations would not be possible. [4]
+
+
+3. Methodology
+
+
+4. Conclusion 
+This paper presented a code implementation for a Spatial Pooler (SP) experiment demonstrating its ability to learn spatial patterns. The code incorporates the following key features:
+* Configuration: The code allows customization of various parameters like network size, input bit size, and learning parameters through the HtmConfig class.
+* Encoder: The code utilizes an EncoderBase class to handle input encoding, providing flexibility for using different encoding schemes.
+* Homeostatic Plasticity: The code integrates a HomeostaticPlasticityController (HPC) to regulate the learning process and monitor stability.
+* Learning Loop: The code iterates through a set of input values, performing the following within each iteration:
+   * Encoding the input value.
+   * Calling the SP's Compute method to learn the pattern.
+   * Calculating similarity with previously learned representations.
+   * Tracking active columns and other relevant information.
+* Threading (Optional): The code offers a commented-out section showcasing how to potentially apply threading for parallel processing of input values, potentially improving performance for large datasets.
+Further Enhancements:
+* Visualization: Implementing visualization tools to observe the evolution of SDR (Sparse Distributed Representation) during the learning process would be beneficial for understanding the learned patterns.
+* Error Handling: Incorporating robust error handling mechanisms can improve the code's resilience to unexpected issues.
+* Testing and Optimization: Conducting thorough testing with various input sets and configurations is essential to evaluate performance and identify potential optimization opportunities.
+In conclusion, this code provides a starting point for implementing and exploring SP functionalities. By building upon this foundation and incorporating additional features, researchers or developers can apply SPs to various tasks involving pattern recognition and learning from spatial data.
+
+
+5. References
+
+
+
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+Frankfurt University of Applied Sciences 2023
