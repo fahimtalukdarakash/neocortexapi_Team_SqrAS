@@ -81,15 +81,15 @@ namespace NeoCortexApiSample
 
             var sp = RunExperiment(cfg, encoder, inputValues);
 
-            //Creating an array of 1024 which has all zero values
-            int[] myArray = CreateArrayWithZeros();
-            static int[] CreateArrayWithZeros()
+            //Creating an array of 1024 which has all one values
+            int[] myArray = CreateArrayWithOnes();
+            static int[] CreateArrayWithOnes()
             {
                 int[] newArray = new int[1024];
 
                 for (int i = 0; i < newArray.Length; i++)
                 {
-                    newArray[i] = 0;
+                    newArray[i] = 1;
                 }
 
                 return newArray;
