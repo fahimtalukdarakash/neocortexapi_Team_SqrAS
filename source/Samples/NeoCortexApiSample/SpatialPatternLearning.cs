@@ -252,7 +252,7 @@ namespace NeoCortexApiSample
                     }
 
                 }
-                if(SDRofallinputs == true && isInStableState == false)
+                if (SDRofallinputs == true && isInStableState == false)
                 {
                     foreach (var input in inputofSDRspercycle)
                     {
@@ -328,10 +328,10 @@ namespace NeoCortexApiSample
                     }
                 }
                 Console.WriteLine(countForCycle);
-                
+
                 //When the cycle count match with given minimum number of cycles then the program will break
                 if (countForCycle == minimumArrayNeededToBreakTheCycle)
-                {                    
+                {
                     cycle2 = cycle;
                     break;
                 }
@@ -363,8 +363,7 @@ namespace NeoCortexApiSample
                 Debug.WriteLine($"{i} : {Helpers.StringifyVector(values[values.Count - 1])}");
             }
             return sp;
-       
-
+        }
         private void RunRustructuringExperiment(SpatialPooler sp, EncoderBase encoder, List<double> inputValues)
         {
             foreach (var input in inputValues)
