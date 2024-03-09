@@ -182,6 +182,8 @@ namespace NeoCortexApiSample
             int countForCycle = 0;
             int minimumArrayNeededToBreakTheCycle = 100;
             bool c = false;
+            int numColumns = 1024;
+
 
             // To take the value of the dictionary, in which cycle program will break
             int cycle2 = 0;
@@ -202,6 +204,24 @@ namespace NeoCortexApiSample
 
                     // This is a general way to get the SpatialPooler result from the layer.
                     var activeColumns = cortexLayer.GetResult("sp") as int[];
+                    int[] arrayOfFullActiveColumns = Enumerable.Repeat(0, numColumns).ToArray(); // Creates an array of integers with a length of 1024 filled with zeroes
+                    int j = 0;
+                    for (int i = 0; i < numColumns; i++)
+                    {
+                        if (activeColumns.Length == 0)
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            if (i == activeColumns[j])
+                            {
+                                arrayOfFullActiveColumns[i] = 1;
+                                if (j == activeColumns.Length - 1) break;
+                                j++;
+                            }
+                        }
+                    }
 
                     var actCols = activeColumns.OrderBy(c => c).ToArray();
 
