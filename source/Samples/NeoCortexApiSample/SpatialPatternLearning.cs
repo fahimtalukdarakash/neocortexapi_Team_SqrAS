@@ -290,7 +290,7 @@ namespace NeoCortexApiSample
                         int lengthOfList = values.Count;
                         int[] array1 = values[lengthOfList - 1];
                         int[] array2 = values[lengthOfList - 2];
-
+                        //checking the length of array of the input for put them in the dictionary
                         if (array1.Length == array2.Length)
                         {
                             Console.WriteLine($"{i} : {Helpers.StringifyVector(array1)}....{array1.Length}");
@@ -363,39 +363,7 @@ namespace NeoCortexApiSample
                 Debug.WriteLine($"{i} : {Helpers.StringifyVector(values[values.Count - 1])}");
             }
             return sp;
-        }
-        //Run threading experiment with the SpatialPatternLearning Experiment
-        private static SpatialPooler RunExperiment(HtmConfig cfg, EncoderBase encoder, List<double> inputValues)
-        {
-            // ... (rest of the code remains the same until the loop iterating through inputValues)
-
-            // Create tasks for each input value
-            var tasks = inputValues.Select(async input =>
-            {
-                double similarity;
-
-                // Learn the input pattern
-                var lyrOut = cortexLayer.Compute((object)input, true) as int[];
-                var activeColumns = cortexLayer.GetResult("sp") as int[];
-                var actCols = activeColumns.OrderBy(c => c).ToArray();
-
-                similarity = MathHelpers.CalcArraySimilarity(activeColumns, prevActiveCols[input]);
-
-                // ... (rest of the logic within the loop remains the same)
-
-                prevActiveCols[input] = activeColumns;
-                prevSimilarity[input] = similarity;
-
-                return input; // Optional: Return input for further processing
-            }).ToList();
-
-            // Wait for all tasks to finish
-            Task.WaitAll(tasks.ToArray());
-
-            // ... (rest of the code within RunExperiment remains the same)
-
-            return sp;
-        }
+       
 
         private void RunRustructuringExperiment(SpatialPooler sp, EncoderBase encoder, List<double> inputValues)
         {
