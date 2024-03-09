@@ -84,8 +84,7 @@ namespace NeoCortexApiSample
 
             //RunRustructuringExperiment(sp, encoder, inputValues);
         }
-
-
+        //Initialized  array elements to 1 in method 
 
         /// <summary>
         /// Implements the experiment.
