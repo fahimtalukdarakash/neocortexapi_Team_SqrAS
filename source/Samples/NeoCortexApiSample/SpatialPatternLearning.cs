@@ -71,7 +71,7 @@ namespace NeoCortexApiSample
 
             EncoderBase encoder = new ScalarEncoder(settings);
                        
-            // We create here 100 random input values.
+            // We are creating here 100 random input values.
             List<double> inputValues = new List<double>();
 
             for (int i = 0; i < (int)max; i++)
@@ -81,20 +81,6 @@ namespace NeoCortexApiSample
           
 
             var sp = RunExperiment(cfg, encoder, inputValues);
-
-            //Creating an array of 1024 which has all one values
-            int[] myArray = CreateArrayWithOnes();
-            static int[] CreateArrayWithOnes()
-            {
-                int[] newArray = new int[1024];
-
-                for (int i = 0; i < newArray.Length; i++)
-                {
-                    newArray[i] = 1;
-                }
-
-                return newArray;
-            }
 
             //RunRustructuringExperiment(sp, encoder, inputValues);
         }
