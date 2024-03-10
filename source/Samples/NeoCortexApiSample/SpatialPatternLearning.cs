@@ -240,10 +240,11 @@ namespace NeoCortexApiSample
                     {
                         // If it doesn't exist, create it
                         Directory.CreateDirectory(fullPath);
+                        NeoCortexUtils.DrawBitmap(twoDimArrayofInput, 10, $"{fullPath}\\{cycle}.png", Color.Black, Color.Red, text: input.ToString());
                     }
                     else
                     {
-                        continue;
+                        NeoCortexUtils.DrawBitmap(twoDimArrayofInput, 10, $"{fullPath}\\{cycle}.png", Color.Black, Color.Red, text: input.ToString());
                     }
 
                     //Dictionary, Inpput save if the isInStableState is true
