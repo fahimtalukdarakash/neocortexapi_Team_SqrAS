@@ -1,4 +1,5 @@
-﻿using NeoCortexApi;
+﻿using NeoCortex;
+using NeoCortexApi;
 using NeoCortexApi.Encoders;
 using NeoCortexApi.Entities;
 using NeoCortexApi.Network;
@@ -6,6 +7,8 @@ using NeoCortexApi.Utility;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -67,7 +70,6 @@ namespace NeoCortexApiSample
                 { "ClipInput", false},
                 { "MaxVal", max}
             };
-
 
             EncoderBase encoder = new ScalarEncoder(settings);
                        
@@ -150,7 +152,7 @@ namespace NeoCortexApiSample
 
             double[] inputs = inputValues.ToArray();
 
-            // Will hold the SDR of every inputs.
+            // Here the code Will hold the SDR of every inputs.
             Dictionary<double, int[]> prevActiveCols = new Dictionary<double, int[]>();
 
             // Will hold the similarity of SDKk and SDRk-1 fro every input.
@@ -185,7 +187,7 @@ namespace NeoCortexApiSample
             int numColumns = 1024;
 
 
-            // To take the value of the dictionary, in which cycle program will break
+            // For take the value of the dictionary, in which cycle program will break
             int cycle2 = 0;
             for (int cycle = 0; cycle < maxSPLearningCycles; cycle++)
             {
@@ -229,7 +231,20 @@ namespace NeoCortexApiSample
 
                     Debug.WriteLine($"[cycle={cycle.ToString("D4")}, N={countForCycle}, i={input}, cols=:{actCols.Length} s={similarity}, stable for {countForCycle} cycles] SDR: {Helpers.StringifyVector(actCols)}");
                     int[,] twoDimArrayofInput = ArrayUtils.Make2DArray<int>(arrayOfFullActiveColumns, (int)Math.Sqrt(numColumns), (int)Math.Sqrt(numColumns));
-
+                   
+                    //Creating the folder for the input 0 to input 99
+                    string desiredPath = "D:\\Information Technology\\NeoCortexApi\\Outputs";
+                    string folderName = input.ToString();
+                    string fullPath = Path.Combine(desiredPath, folderName);
+                    if (!Directory.Exists(fullPath))
+                    {
+                        // If it doesn't exist, create it
+                        Directory.CreateDirectory(fullPath);
+                    }
+                    else
+                    {
+                        continue;
+                    }
 
                     //Dictionary, Inpput save if the isInStableState is true
                     //Without the stable value dictionary values will not be saved and shows no value
