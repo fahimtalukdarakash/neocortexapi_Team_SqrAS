@@ -26,7 +26,7 @@ namespace NeoCortexApiSample
 
             // Used as a boosting parameters
             // that ensure homeostatic plasticity effect.
-            double minOctOverlapCycles = 1.0;
+            double minOctOverlapCycles = 0.45;
             double maxBoost = 5.0;
 
             // We will use 200 bits to represent an input vector (pattern).
@@ -41,7 +41,7 @@ namespace NeoCortexApiSample
             {
                 CellsPerColumn = 10,
                 MaxBoost = maxBoost,
-                DutyCyclePeriod = 100,
+                DutyCyclePeriod = 1000,
                 MinPctOverlapDutyCycles = minOctOverlapCycles,
 
                 GlobalInhibition = false,
@@ -233,7 +233,7 @@ namespace NeoCortexApiSample
                     int[,] twoDimArrayofInput = ArrayUtils.Make2DArray<int>(arrayOfFullActiveColumns, (int)Math.Sqrt(numColumns), (int)Math.Sqrt(numColumns));
                    
                     //Creating the folder for the input 0 to input 99
-                    string desiredPath = "D:\\Information Technology\\NeoCortexApi\\Outputs";
+                    /*string desiredPath = "D:\\Information Technology\\NeoCortexApi\\Outputs";
                     string folderName = input.ToString();
                     string fullPath = Path.Combine(desiredPath, folderName);
                     if (!Directory.Exists(fullPath))
@@ -245,7 +245,7 @@ namespace NeoCortexApiSample
                     else
                     {
                         NeoCortexUtils.DrawBitmap(twoDimArrayofInput, 10, $"{fullPath}\\{cycle}.png", Color.Black, Color.Red, text: input.ToString());
-                    }
+                    }*/
 
                     //Dictionary, Inpput save if the isInStableState is true
                     //Without the stable value dictionary values will not be saved and shows no value
