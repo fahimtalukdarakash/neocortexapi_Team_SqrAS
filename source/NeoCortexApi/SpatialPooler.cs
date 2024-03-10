@@ -673,6 +673,53 @@ namespace NeoCortexApi
                 //UpdatePermanencesForColumnSparse(c, perm, col, indexes, true);
             }
         }
+        /// <summary>
+        /// This is the new method boosting the columns with low overlap
+        /// </summary>
+        /// <param name="c"></param>
+        public virtual void BoostColsWithLowOverlap2(Connections c)
+        {
+            // Get columns with too low overlap.
+            var weakColumns = c.Memory.Get1DIndexes().Where(i => c.HtmConfig.OverlapDutyCycles[i] < c.HtmConfig.MinOverlapDutyCycles[i]).ToArray();
+
+            foreach (var weakColumnIndex in weakColumns)
+            {
+                Column col = c.GetColumn(weakColumnIndex);
+
+                // Get the boosting signal for the weak column based on its overlap duty cycle.
+                double boostingSignal = CalculateBoostingSignal(col, c.HtmConfig);
+
+                // Adjust the synaptic connections (permanences) associated with the weak column.
+                AdjustPermanencesForColumn(col, c.HtmConfig.SynPermBelowStimulusInc, boostingSignal, c);
+            }
+        }
+
+        private double CalculateBoostingSignal(Column col, HtmConfig config)
+        {
+            double overlapDutyCycle = config.OverlapDutyCycles[col.Index];
+            double minOverlapDutyCycle = config.MinOverlapDutyCycles[col.Index];
+            double BoostAlpha = 100;
+            // Calculate the boosting signal based on the difference between the current overlap duty cycle and the minimum overlap duty cycle.
+            //double boostingSignal = 1 / (1 + Math.Exp(-BoostAlpha * (overlapDutyCycle - minOverlapDutyCycle)));
+            double boostingSignal = Math.Exp(-BoostAlpha * (overlapDutyCycle - minOverlapDutyCycle));
+
+            return boostingSignal;
+        }
+
+        private void AdjustPermanencesForColumn(Column col, double synPermBelowStimulusInc, double boostingSignal, Connections c)
+        {
+            Pool pool = col.ProximalDendrite.RFPool;
+            double[] permanences = pool.GetSparsePermanences();
+
+            // Boost the permanences associated with the weak column.
+            for (int i = 0; i < permanences.Length; i++)
+            {
+                permanences[i] += synPermBelowStimulusInc * boostingSignal;
+            }
+
+            // Update the permanences for the column.
+            col.UpdatePermanencesForColumnSparse(c.HtmConfig, permanences, pool.GetSparsePotential(), true);
+        }
 
         /// <summary>
         /// This method ensures that each column has enough connections to input bits to allow it to become active. 
