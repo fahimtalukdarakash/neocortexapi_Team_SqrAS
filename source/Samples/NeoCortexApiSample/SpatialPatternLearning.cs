@@ -186,9 +186,17 @@ namespace NeoCortexApiSample
             bool c = false;
             int numColumns = 1024;
 
-
-            // For take the value of the dictionary, in which cycle program will break
             int cycle2 = 0;
+            Dictionary<double, int> SimilarityOfInput = new Dictionary<double, int>();
+            foreach (var input in inputs)
+            {
+                SimilarityOfInput[input] = 0;
+            }
+            Dictionary<double, int> StableCycleNumberofEachInput = new Dictionary<double, int>();
+            foreach (var input in inputs)
+            {
+                StableCycleNumberofEachInput[input] = 0;
+            }
             for (int cycle = 0; cycle < maxSPLearningCycles; cycle++)
             {
                 Debug.WriteLine($"Cycle  ** {cycle} ** Stability: {isInStableState}");
@@ -228,8 +236,21 @@ namespace NeoCortexApiSample
                     var actCols = activeColumns.OrderBy(c => c).ToArray();
 
                     similarity = MathHelpers.CalcArraySimilarity(activeColumns, prevActiveCols[input]);
+                    if ((int)similarity == 100)
+                    {
+                        SimilarityOfInput[input]++;
+                        if (SimilarityOfInput[input] == 50)
+                        {
+                            StableCycleNumberofEachInput[input] = cycle;
+                        }
+                    }
+                    else
+                    {
+                        SimilarityOfInput[input] = 0;
+                    }
 
-                    Debug.WriteLine($"[cycle={cycle.ToString("D4")}, N={countForCycle}, i={input}, cols=:{actCols.Length} s={similarity}, stable for {countForCycle} cycles] SDR: {Helpers.StringifyVector(actCols)}");
+                    Debug.WriteLine($"[cycle={cycle.ToString("D4")}, N={SimilarityOfInput[input]}, i={input}, cols=:{actCols.Length} s={similarity}, stable for {countForCycle} cycles] SDR: {Helpers.StringifyVector(actCols)}");
+                    
                     int[,] twoDimArrayofInput = ArrayUtils.Make2DArray<int>(arrayOfFullActiveColumns, (int)Math.Sqrt(numColumns), (int)Math.Sqrt(numColumns));
                    
                     //Creating the folder for the input 0 to input 99
