@@ -285,6 +285,28 @@ namespace NeoCortexApiSample
                     prevActiveCols[input] = activeColumns;
                     prevSimilarity[input] = similarity;
                 }
+
+                //For which input 50 Cycle's of SDR is similar, will be denoted here as Stable Input
+                int count2 = 0;
+                foreach (var input in SimilarityOfInput)
+                {
+                    double i = input.Key;
+                    int value = input.Value;
+                    int value2 = StableCycleNumberofEachInput[i];
+                    if (value >= 50)
+                    {
+                        Debug.WriteLine($"input {i}: Stable Input and stable on {value2} cycle");
+                        count2++;
+                    }
+                    else
+                    {
+                        Debug.WriteLine($"input {i}: Not stable Input ");
+                    }
+                }
+                double stabilityPercentageOfCycle = ((double)count2 / lengthoftotalinputs) * 100;
+                Debug.WriteLine($"{stabilityPercentageOfCycle}% stable");
+
+
                 foreach (var input in inputofSDRspercycle)
                 {
                     //Checking all the input has SDR or not.
