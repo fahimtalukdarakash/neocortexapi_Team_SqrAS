@@ -26,7 +26,7 @@ namespace NeoCortexApiSample
 
             // Used as a boosting parameters
             // that ensure homeostatic plasticity effect.
-            double minOctOverlapCycles = 0.45;
+            double minOctOverlapCycles = 0.5;
             double maxBoost = 5.0;
 
             // We will use 200 bits to represent an input vector (pattern).
@@ -201,7 +201,7 @@ namespace NeoCortexApiSample
             {
                 Debug.WriteLine($"Cycle  ** {cycle} ** Stability: {isInStableState}");
 
-                //
+                
                 // This trains the layer on input pattern.
                 foreach (var input in inputs)
                 {
@@ -252,11 +252,18 @@ namespace NeoCortexApiSample
                     Debug.WriteLine($"[cycle={cycle.ToString("D4")}, N={SimilarityOfInput[input]}, i={input}, cols=:{actCols.Length} s={similarity}, stable for {countForCycle} cycles] SDR: {Helpers.StringifyVector(actCols)}");
                     
                     int[,] twoDimArrayofInput = ArrayUtils.Make2DArray<int>(arrayOfFullActiveColumns, (int)Math.Sqrt(numColumns), (int)Math.Sqrt(numColumns));
-                   
-                    //Creating the folder for the input 0 to input 99
-                    /*string desiredPath = "D:\\Information Technology\\NeoCortexApi\\Outputs";
+
+                    //Assigning the path dynamically for bitmap outputs
+                    string basePath = Path.Combine(Environment.CurrentDirectory, "Outputs");
+                    if (!Directory.Exists(basePath))
+                    {
+                        Directory.CreateDirectory(basePath);
+                    }
+                    string desiredPath = basePath;
                     string folderName = input.ToString();
                     string fullPath = Path.Combine(desiredPath, folderName);
+
+                    //Creating the folder for the input 0 to input 99
                     if (!Directory.Exists(fullPath))
                     {
                         // If it doesn't exist, create it
@@ -266,7 +273,7 @@ namespace NeoCortexApiSample
                     else
                     {
                         NeoCortexUtils.DrawBitmap(twoDimArrayofInput, 10, $"{fullPath}\\{cycle}.png", Color.Black, Color.Red, text: input.ToString());
-                    }*/
+                    }
 
                     //Dictionary, Inpput save if the isInStableState is true
                     //Without the stable value dictionary values will not be saved and shows no value
