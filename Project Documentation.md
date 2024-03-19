@@ -601,8 +601,10 @@ When input is not getting stable,</br>
 ![Input not getting stable](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/images/Input%20getting%20not%20stable.png)
 
 3. After each cycle, we are showing by percentage that how many inputs are stable for that perticular cycle.</br>
+When a cycle is 100% stable.</br>
 ![Stability percentage for all inputs (100% stable)](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/images/Stability%20percentage%20for%20all%20inputs%20in%20a%20cycle%201.png)</br>
-![Stability percentage for all inputs (97% stable)](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/images/Stability%20percentage%20for%20all%20inputs%20in%20a%20cycle%202.png)
+When a cycle is less than 100% stable</br>
+![Stability percentage for all inputs (93% stable)](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/images/Stability%20percentage%20for%20all%20inputs%20in%20a%20cycle%202.png)
 
 4. We also generate the bitmap for each input of every cycle so that we can easily viewed how actually the SDRs are changing for inputs per cycle. Below here, given a video of that represention:</br>
 [![Bitmap Output](https://github.com/fahimtalukdarakash/weather-showing-project/blob/main/Bitmap%20Output%20for%20input%200.png)](https://www.youtube.com/watch?v=RHf9Xz7jz7A)</br>
