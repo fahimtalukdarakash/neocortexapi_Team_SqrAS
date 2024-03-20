@@ -488,5 +488,26 @@ namespace NeoCortexApiSample
             }
             return arrayOfFullActiveColumns;
         }
+        private void DrawBitMapForInputOfEachCycle(int[,] twoDimArrayofInput, double input, int cycle)
+        {
+            string basePath = Path.Combine(Environment.CurrentDirectory, "Outputs");
+            if (!Directory.Exists(basePath))
+            {
+                Directory.CreateDirectory(basePath);
+            }
+            string desiredPath = basePath;
+            string folderNameForInput = input.ToString();
+            string fullPath = Path.Combine(desiredPath, folderNameForInput);
+            if (!Directory.Exists(fullPath))
+            {
+                // If it doesn't exist, create it
+                Directory.CreateDirectory(fullPath);
+                NeoCortexUtils.DrawBitmap(twoDimArrayofInput, 10, $"{fullPath}\\{cycle}.png", Color.Black, Color.Red, text: input.ToString());
+            }
+            else
+            {
+                NeoCortexUtils.DrawBitmap(twoDimArrayofInput, 10, $"{fullPath}\\{cycle}.png", Color.Black, Color.Red, text: input.ToString());
+            }
+        }
     }
 }
