@@ -602,5 +602,20 @@ namespace NeoCortexApiSample
                 Debug.WriteLine($"{i} : {Helpers.StringifyVector(values[values.Count - 1])}"); 
             }
         }
+        private void PrintingLast100CyclesSDRofEachInput(Dictionary<double, List<int[]>> inputofSDRspercycle, int cycle2)
+        {
+            foreach (var input in inputofSDRspercycle)
+            {
+                double i = input.Key;
+                List<int[]> values = input.Value;
+                int cycle = cycle2 - 102;
+                Debug.WriteLine($"input:{i}");
+                foreach (var SDRarray in values)
+                {
+                    Debug.WriteLine($"cycle {cycle}:{Helpers.StringifyVector(SDRarray)}");
+                    cycle++;
+                }
+            }
+        }
     }
 }
