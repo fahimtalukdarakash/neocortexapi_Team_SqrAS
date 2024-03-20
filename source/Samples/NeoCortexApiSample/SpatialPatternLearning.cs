@@ -593,5 +593,14 @@ namespace NeoCortexApiSample
             }
             return c;
         }
+        private void PrintingFinalSDRofAllInputs(Dictionary<double, List<int[]>> inputofSDRspercycle)
+        {
+            foreach (var input in inputofSDRspercycle)
+            {
+                double i = input.Key;
+                List<int[]> values = input.Value;
+                Debug.WriteLine($"{i} : {Helpers.StringifyVector(values[values.Count - 1])}");
+            }
+        }
     }
 }
