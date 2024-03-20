@@ -599,7 +599,7 @@ namespace NeoCortexApiSample
             {
                 double i = input.Key;
                 List<int[]> values = input.Value;
-                Debug.WriteLine($"{i} : {Helpers.StringifyVector(values[values.Count - 1])}");
+                Debug.WriteLine($"{i} : {Helpers.StringifyVector(values[values.Count - 1])}"); 
             }
         }
     }
