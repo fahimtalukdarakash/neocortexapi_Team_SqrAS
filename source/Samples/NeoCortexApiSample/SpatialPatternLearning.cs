@@ -509,5 +509,52 @@ namespace NeoCortexApiSample
                 NeoCortexUtils.DrawBitmap(twoDimArrayofInput, 10, $"{fullPath}\\{cycle}.png", Color.Black, Color.Red, text: input.ToString());
             }
         }
+        static Dictionary<double, int> a = new Dictionary<double, int>();
+        private bool CheckingOfAllInputHaveSDRorNot(Dictionary<double, List<int[]>> inputofSDRspercycle, int lengthoftotalinputs, bool SDRofallinputs)
+        {
+            //Dictionary<double, int> a = new Dictionary<double, int>();
+            foreach (var input in inputofSDRspercycle)
+            {
+                //Checking all the input has SDR or not.
+                if (SDRofallinputs == false)
+                {
+                    double i = input.Key;
+                    List<int[]> values = input.Value;
+                    foreach (var SDRarray in values)
+                    {
+                        if (SDRarray.Length == 0)
+                        {
+                            a[i] = 0;
+                        }
+                        else
+                        {
+                            a[i] = 1;
+                        }
+                    }
+                }
+                else
+                {
+
+                    //Console.WriteLine("full SDR of inputs are done 1");
+                    break;
+                }
+
+            }        
+            int count = 0;
+            foreach (var b in a)
+            {
+                if (b.Value == 1)
+                {
+                    count++;
+                    //Console.WriteLine(count);
+                }
+            }
+            if (count == lengthoftotalinputs)
+            {
+                SDRofallinputs = true;
+                //Console.WriteLine("full SDR of input done");
+            }
+            return SDRofallinputs;
+        }
     }
 }
