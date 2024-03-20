@@ -556,5 +556,42 @@ namespace NeoCortexApiSample
             }
             return SDRofallinputs;
         }
+        private bool ComparingOfSDRsForEachCyclePerInput(Dictionary<double, List<int[]>> inputofSDRspercycle, bool c)
+        {
+            foreach (var input in inputofSDRspercycle)
+            {
+                double i = input.Key;
+                List<int[]> values = input.Value;
+                int lengthOfList = values.Count;
+                int[] array1 = values[lengthOfList - 1];
+                int[] array2 = values[lengthOfList - 2];
+
+                if (array1.Length == array2.Length)
+                {
+                    for (int j = 0; j < array1.Length; j++)
+                    {
+                        if (array1[j] == array2[j])
+                        {
+                            if (j == array1.Length - 1)
+                            {
+                                c = true;
+                            }
+                        }
+                        else
+                        {
+                            c = false;
+
+                        }
+                    }
+                    if (c == false) break;
+                }
+                else
+                {
+                    c = false;
+                    break;
+                }
+            }
+            return c;
+        }
     }
 }
