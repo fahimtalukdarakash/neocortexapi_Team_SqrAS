@@ -467,5 +467,26 @@ namespace NeoCortexApiSample
                 Debug.WriteLine($"Input: {input} SDR: {Helpers.StringifyVector(actCols)}");
             }
         }
+        private int[] ConvertingZerosIntoOneAtPreferredIndex(int[] arrayOfFullActiveColumns, int[] activeColumns)
+        {
+            int j = 0;
+            for (int i = 0; i < arrayOfFullActiveColumns.Length; i++)
+            {
+                if (activeColumns.Length == 0)
+                {
+                    continue;
+                }
+                else
+                {
+                    if (i == activeColumns[j])
+                    {
+                        arrayOfFullActiveColumns[i] = 1;
+                        if (j == activeColumns.Length - 1) break;
+                        j++;
+                    }
+                }
+            }
+            return arrayOfFullActiveColumns;
+        }
     }
 }
