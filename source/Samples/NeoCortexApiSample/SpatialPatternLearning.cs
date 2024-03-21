@@ -323,6 +323,9 @@ namespace NeoCortexApiSample
                 Debug.WriteLine($"Input: {input} SDR: {Helpers.StringifyVector(actCols)}");
             }
         }
+        //activeColumns provides only the number of the columns. 
+        //The parameter "arrayofFullActiveColumns" will have 1024 columns
+        //Active columns and inactive columns will be reselting to 1 and 0 respectively  
         private int[] ConvertingZerosIntoOneAtPreferredIndex(int[] arrayOfFullActiveColumns, int[] activeColumns)
         {
             int j = 0;
@@ -344,6 +347,10 @@ namespace NeoCortexApiSample
             }
             return arrayOfFullActiveColumns;
         }
+        //generates BitMaps from cycle 1 to last cycle(till breaks) for each input.
+        //parameter "twoDimArrayofInput" is a two-dimensional array of arrayOfFullActiveColumns
+        //parameter "input" is for creating the folder for this particular variable
+        //parameter "cycle" is for naming the image
         private void DrawBitMapForInputOfEachCycle(int[,] twoDimArrayofInput, double input, int cycle)
         {
             string basePath = Path.Combine(Environment.CurrentDirectory, "Outputs");
