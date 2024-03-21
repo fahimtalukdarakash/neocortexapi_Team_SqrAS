@@ -169,6 +169,8 @@ namespace NeoCortexApiSample
             // Learning process will take 1000 iterations (cycles)
             int maxSPLearningCycles = 1000;
 
+            SpatialPatternLearning spl = new SpatialPatternLearning();
+
             // int numStableCycles = 0;
 
             //Dictionary Initialization && Value Initialization
@@ -201,7 +203,7 @@ namespace NeoCortexApiSample
             {
                 Debug.WriteLine($"Cycle  ** {cycle} ** Stability: {isInStableState}");
 
-                
+                //
                 // This trains the layer on input pattern.
                 foreach (var input in inputs)
                 {
@@ -214,28 +216,13 @@ namespace NeoCortexApiSample
 
                     // This is a general way to get the SpatialPooler result from the layer.
                     var activeColumns = cortexLayer.GetResult("sp") as int[];
-                    int[] arrayOfFullActiveColumns = Enumerable.Repeat(0, numColumns).ToArray(); // Creates an array of integers with a length of 1024 filled with zeroes
-                    int j = 0;
-                    for (int i = 0; i < numColumns; i++)
-                    {
-                        if (activeColumns.Length == 0)
-                        {
-                            continue;
-                        }
-                        else
-                        {
-                            if (i == activeColumns[j])
-                            {
-                                arrayOfFullActiveColumns[i] = 1;
-                                if (j == activeColumns.Length - 1) break;
-                                j++;
-                            }
-                        }
-                    }
 
                     var actCols = activeColumns.OrderBy(c => c).ToArray();
-
+                    
+                    int[] arrayOfFullActiveColumns = Enumerable.Repeat(0, numColumns).ToArray(); // Creates an array of integers with a length of 1024 filled with zeroes
+                    arrayOfFullActiveColumns = spl.ConvertingZerosIntoOneAtPreferredIndex(arrayOfFullActiveColumns, activeColumns);
                     similarity = MathHelpers.CalcArraySimilarity(activeColumns, prevActiveCols[input]);
+                    
                     if ((int)similarity == 100)
                     {
                         SimilarityOfInput[input]++;
@@ -252,29 +239,8 @@ namespace NeoCortexApiSample
                     Debug.WriteLine($"[cycle={cycle.ToString("D4")}, N={SimilarityOfInput[input]}, i={input}, cols=:{actCols.Length} s={similarity}, stable for {countForCycle} cycles] SDR: {Helpers.StringifyVector(actCols)}");
                     
                     int[,] twoDimArrayofInput = ArrayUtils.Make2DArray<int>(arrayOfFullActiveColumns, (int)Math.Sqrt(numColumns), (int)Math.Sqrt(numColumns));
-
-                    //Assigning the path dynamically for bitmap outputs
-                    string basePath = Path.Combine(Environment.CurrentDirectory, "Outputs");
-                    if (!Directory.Exists(basePath))
-                    {
-                        Directory.CreateDirectory(basePath);
-                    }
-                    string desiredPath = basePath;
-                    string folderName = input.ToString();
-                    string fullPath = Path.Combine(desiredPath, folderName);
-
-                    //Creating the folder for the input 0 to input 99
-                    if (!Directory.Exists(fullPath))
-                    {
-                        // If it doesn't exist, create it
-                        Directory.CreateDirectory(fullPath);
-                        NeoCortexUtils.DrawBitmap(twoDimArrayofInput, 10, $"{fullPath}\\{cycle}.png", Color.Black, Color.Red, text: input.ToString());
-                    }
-                    else
-                    {
-                        NeoCortexUtils.DrawBitmap(twoDimArrayofInput, 10, $"{fullPath}\\{cycle}.png", Color.Black, Color.Red, text: input.ToString());
-                    }
-
+                    
+                    spl.DrawBitMapForInputOfEachCycle(twoDimArrayofInput, input, cycle);
                     //Dictionary, Inpput save if the isInStableState is true
                     //Without the stable value dictionary values will not be saved and shows no value
                     if (isInStableState == true)
@@ -285,61 +251,12 @@ namespace NeoCortexApiSample
                     prevActiveCols[input] = activeColumns;
                     prevSimilarity[input] = similarity;
                 }
-
-                //For which input 50 Cycle's of SDR is similar, will be denoted here as Stable Input
-                int count2 = 0;
-                foreach (var input in SimilarityOfInput)
-                {
-                    double i = input.Key;
-                    int value = input.Value;
-                    int value2 = StableCycleNumberofEachInput[i];
-                    if (value >= 50)
-                    {
-                        Debug.WriteLine($"input {i}: Stable Input and stable on {value2} cycle");
-                        count2++;
-                    }
-                    else
-                    {
-                        Debug.WriteLine($"input {i}: Not stable Input ");
-                    }
-                }
-                double stabilityPercentageOfCycle = ((double)count2 / lengthoftotalinputs) * 100;
-                Debug.WriteLine($"{stabilityPercentageOfCycle}% stable");
-
-
-                foreach (var input in inputofSDRspercycle)
-                {
-                    //Checking all the input has SDR or not.
-                    if (SDRofallinputs == false)
-                    {
-                        double i = input.Key;
-                        List<int[]> values = input.Value;
-                        foreach (var SDRarray in values)
-                        {
-                            if (SDRarray.Length == 0)
-                            {
-                                a[i] = 0;
-                            }
-                            else
-                            {
-                                a[i] = 1;
-                            }
-                            //Console.WriteLine($"{i} : {Helpers.StringifyVector(SDRarray)}");
-                        }
-                    }
-                    else
-                    {
-                        //Checking if every input has array or not.
-                        minimumArray++;
-                        if (minimumArray == 2)
-                        {
-                            Console.WriteLine("all input have minimum 2 arrays");
-                        }
-                        Console.WriteLine("full SDR of inputs are done");
-                        break;
-                    }
-
-                }
+                
+                spl.PrintingStableCycleNumberOfEachInput(SimilarityOfInput, StableCycleNumberofEachInput, lengthoftotalinputs);
+                
+                SDRofallinputs = spl.CheckingOfAllInputHaveSDRorNot(inputofSDRspercycle, lengthoftotalinputs, SDRofallinputs);
+                if (SDRofallinputs == true) minimumArray++;
+                
                 if (SDRofallinputs == true && isInStableState == false)
                 {
                     foreach (var input in inputofSDRspercycle)
@@ -355,57 +272,12 @@ namespace NeoCortexApiSample
                     minimumArray = 0;
                     countForCycle = 0;
                 }
-                int count = 0;
-                foreach (var b in a)
-                {
-                    if (b.Value == 1)
-                    {
-                        count++;
-                    }
-                }
-                if (count == lengthoftotalinputs)
-                {
-                    SDRofallinputs = true;
-                    //Console.WriteLine("full SDR of input done");
-                }
+
+
                 if (SDRofallinputs == true && minimumArray >= 2)
                 {
 
-                    foreach (var input in inputofSDRspercycle)
-                    {
-                        double i = input.Key;
-                        List<int[]> values = input.Value;
-                        int lengthOfList = values.Count;
-                        int[] array1 = values[lengthOfList - 1];
-                        int[] array2 = values[lengthOfList - 2];
-                        //checking the length of array of the input for put them in the dictionary
-                        if (array1.Length == array2.Length)
-                        {
-                            Console.WriteLine($"{i} : {Helpers.StringifyVector(array1)}....{array1.Length}");
-                            Console.WriteLine($"{i} : {Helpers.StringifyVector(array2)}....{array2.Length}");
-                            for (int j = 0; j < array1.Length; j++)
-                            {
-                                if (array1[j] == array2[j])
-                                {
-                                    if (j == array1.Length - 1)
-                                    {
-                                        c = true;
-                                    }
-                                }
-                                else
-                                {
-                                    c = false;
-                                    break;
-                                }
-                            }
-                            if (c == false) break;
-                        }
-                        else
-                        {
-                            c = false;
-                            break;
-                        }
-                    }
+                    c = spl.ComparingOfSDRsForEachCyclePerInput(inputofSDRspercycle, c);
                     if (c == true)
                     {
                         countForCycle++;
@@ -415,8 +287,7 @@ namespace NeoCortexApiSample
                         countForCycle = 0;
                     }
                 }
-                Console.WriteLine(countForCycle);
-
+                
                 //When the cycle count match with given minimum number of cycles then the program will break
                 if (countForCycle == minimumArrayNeededToBreakTheCycle)
                 {
@@ -431,25 +302,10 @@ namespace NeoCortexApiSample
                 if (numStableCycles > 5)
                     break;*/
             }
-            foreach (var input in inputofSDRspercycle)
-            {
-                double i = input.Key;
-                List<int[]> values = input.Value;
-                int cycle = cycle2;
-                Debug.WriteLine($"input:{i}");
-                foreach (var SDRarray in values)
-                {
-                    Debug.WriteLine($"cycle {cycle}:{Helpers.StringifyVector(SDRarray)}");
-                    cycle--;
-                }
-            }
+            spl.PrintingLast100CyclesSDRofEachInput(inputofSDRspercycle, cycle2);
             Debug.WriteLine("Final SDR of all inputs");
-            foreach (var input in inputofSDRspercycle)
-            {
-                double i = input.Key;
-                List<int[]> values = input.Value;
-                Debug.WriteLine($"{i} : {Helpers.StringifyVector(values[values.Count - 1])}");
-            }
+            // Printing the final column list for each input.
+            spl.PrintingFinalSDRofAllInputs(inputofSDRspercycle);
             return sp;
         }
         private void RunRustructuringExperiment(SpatialPooler sp, EncoderBase encoder, List<double> inputValues)

@@ -25,11 +25,11 @@ Use an additional value stable X cycles.
 
 ## 1. Objectives:
 Based on the project description, We have subdivided our tasks and the list of those tasks are as below:
-- **Task 1:** Analyzing the code of spatial pattern learning
-- **Task 2:** Investing the reason, why first 40 cycles don't give mini columns list for inputs 51 to 99.
-- **Task 3:** Implementing new spatial pattern learning experiment.
-- **Task 4:** Write out the dictionary at the end
-- **Task 5:** Providing some more readable statistical info about the stability of all mini-columns.
+- [**Task 1:**](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-1-analyzing-the-code-of-spatial-pattern-learning) Analyzing the code of spatial pattern learning
+- [**Task 2:**](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-2-investegating-the-reason-why-first-40-cycles-dont-give-mini-columns-list-of-sdr-for-inputs-51-to-99) Investing the reason, why first 40 cycles don't give mini columns list for inputs 51 to 99.
+- [**Task 3:**](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-3-implementing-new-spatial-pattern-learning-experiment) Implementing new spatial pattern learning experiment.
+- [**Task 4:**](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-4-write-out-the-dictionary-at-the-end) Write out the dictionary at the end
+- [**Task 5:**](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-5-providing-some-more-readable-statistical-info-about-the-stability-of-all-mini-columns) Providing some more readable statistical info about the stability of all mini-columns.
 
 ## Approach
 
