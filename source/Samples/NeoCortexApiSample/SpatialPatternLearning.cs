@@ -288,7 +288,7 @@ namespace NeoCortexApiSample
                     }
                 }
                 
-                //When the cycle count match with given minimum number of cycles then the program will break
+                //Condition checking When the cycle count match with given minimum number of cycles then the program will break
                 if (countForCycle == minimumArrayNeededToBreakTheCycle)
                 {
                     cycle2 = cycle;
@@ -304,7 +304,7 @@ namespace NeoCortexApiSample
             }
             spl.PrintingLast100CyclesSDRofEachInput(inputofSDRspercycle, cycle2);
             Debug.WriteLine("Final SDR of all inputs");
-            // Printing the final column list for each input.
+            // Printing the final SDR column list for each input.
             spl.PrintingFinalSDRofAllInputs(inputofSDRspercycle);
             return sp;
         }
@@ -458,6 +458,7 @@ namespace NeoCortexApiSample
                 Debug.WriteLine($"{i} : {Helpers.StringifyVector(values[values.Count - 1])}"); 
             }
         }
+        //Refactoring method for printing last 100 cycles of Each input
         private void PrintingLast100CyclesSDRofEachInput(Dictionary<double, List<int[]>> inputofSDRspercycle, int cycle2)
         {
             foreach (var input in inputofSDRspercycle)
@@ -472,6 +473,28 @@ namespace NeoCortexApiSample
                     cycle++;
                 }
             }
+        }
+        // Creating the refactoring method for Printing Stable Cycles number of each input
+        private void PrintingStableCycleNumberOfEachInput(Dictionary<double, int> SimilarityOfInput, Dictionary<double, int> StableCycleNumberofEachInput, int lengthoftotalinputs)
+        {
+            int count2 = 0;
+            foreach (var input in SimilarityOfInput)
+            {
+                double i = input.Key;
+                int value = input.Value;
+                int value2 = StableCycleNumberofEachInput[i];
+                if (value >= 50)
+                {
+                    Debug.WriteLine($"input {i}: Stable Input and stable on {value2} cycle");
+                    count2++;
+                }
+                else
+                {
+                    Debug.WriteLine($"input {i}: Not stable Input ");
+                }
+            }
+            double stabilityPercentageOfCycle = ((double)count2 / lengthoftotalinputs) * 100;
+            Debug.WriteLine($"{stabilityPercentageOfCycle}% stable");
         }
     }
 }
