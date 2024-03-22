@@ -433,6 +433,27 @@ namespace NeoCortexApiSample
             }
             return SDRofallinputs;
         }
+        //<summary>
+        //<parameter name="inputofSDRspercycle">
+        //This is a dictionary that contains the SDRs per cycle for each input.
+        //</parameter>
+        //<paramer name="array1">
+        //array1 is the final SDR array of the particular that is stored..
+        //</parameter>
+        //<parameter name="array2">
+        //array2 is the previous cycles SDR array of the previous SDR array.
+        //For example, suppose input 0 contains a 10-cycle SDR array. array1 will be the SDR array of cycle 10, and array 2 will be the SDR array of cycle 9.
+        //</parameter>
+        //<parameter name="c">
+        //C is a boolean variable that is set to false. If the lengths of these two arrays are the same, as are all of their SDR values, then this 'c' variable is set to true; otherwise, it is set to false.
+        //</parameter>
+        //When SDRofallinputs=true and the minimumArray count is 2, we begin the comparison.
+        //<parameter name="countForCycle">
+        //This variable counts cycles after isInStableState is set to true, and if two SDR arrays are compared, the value of this variable increases by one.
+        //</parameter>
+        //So, if 'c' returns true, this indicates that all of the conditions for comparing the two arrays have been met, and we are incrementing the variable countForCycle by one.
+        //If 'c' is false, we set the variable countForCycle to zero.
+        //</summary>
         private bool ComparingOfSDRsForEachCyclePerInput(Dictionary<double, List<int[]>> inputofSDRspercycle, bool c)
         {
             foreach (var input in inputofSDRspercycle)
