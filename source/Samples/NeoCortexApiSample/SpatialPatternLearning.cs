@@ -376,6 +376,15 @@ namespace NeoCortexApiSample
                 NeoCortexUtils.DrawBitmap(twoDimArrayofInput, 10, $"{fullPath}\\{cycle}.png", Color.Black, Color.Red, text: input.ToString());
             }
         }
+
+        //Checking if all inputs have SDR columns.
+        //The reason for this is that stability is checked input-wise rather than cycle-wise, so isInStableState can be set to true during the middle of a cycle.
+        //When isInStableState is set to true, some inputs will initially lack SDRs while the rest will have SDRs.
+        //So we need to determine whether all of the input contains SDRs or not.
+        //Also, check whether an input has at least two arrays of SDRs, as comparing the SDRs for one input per cycle requires at least two arrays of SDRs.
+        //This is a dictionary that stores the number of SDRs per cycle for each input.
+        //This is another dictionary that stores 0 and 1 for each input based on whether the input has an SDR array or not by checking the SDR array length.
+        //If an input contains an SDR array, the length of the array must be greater than zero. If the length of the SDR array is greater than zero, then a[input]=1 or a[input]=0.        
         
         static Dictionary<double, int> a = new Dictionary<double, int>();
         private bool CheckingOfAllInputHaveSDRorNot(Dictionary<double, List<int[]>> inputofSDRspercycle, int lengthoftotalinputs, bool SDRofallinputs)
