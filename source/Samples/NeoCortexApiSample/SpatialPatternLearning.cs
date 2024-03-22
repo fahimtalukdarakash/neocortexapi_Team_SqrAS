@@ -302,9 +302,10 @@ namespace NeoCortexApiSample
                 if (numStableCycles > 5)
                     break;*/
             }
+            // This function prints the dictionary containing the last 100 cycles' SDR values for each input.
             spl.PrintingLast100CyclesSDRofEachInput(inputofSDRspercycle, cycle2);
             Debug.WriteLine("Final SDR of all inputs");
-            // Printing the final SDR column list for each input.
+            //Outputs the final column list for each input.
             spl.PrintingFinalSDRofAllInputs(inputofSDRspercycle);
             return sp;
         }
@@ -323,9 +324,12 @@ namespace NeoCortexApiSample
                 Debug.WriteLine($"Input: {input} SDR: {Helpers.StringifyVector(actCols)}");
             }
         }
-        //activeColumns provides only the number of the columns. 
-        //The parameter "arrayofFullActiveColumns" will have 1024 columns
-        //Active columns and inactive columns will be reselting to 1 and 0 respectively  
+        //<summary>
+        //Above activeColumns provides only the column number.
+        //<parameter name="arrayOfFullActiveColumns">
+        //This arrayOfFullActiveColumns will have full 1024 columns, and whichever columns are active will be 1 and the rest will be zero.
+        //</parameter>
+        //</summary>
         private int[] ConvertingZerosIntoOneAtPreferredIndex(int[] arrayOfFullActiveColumns, int[] activeColumns)
         {
             int j = 0;
@@ -372,6 +376,7 @@ namespace NeoCortexApiSample
                 NeoCortexUtils.DrawBitmap(twoDimArrayofInput, 10, $"{fullPath}\\{cycle}.png", Color.Black, Color.Red, text: input.ToString());
             }
         }
+        
         static Dictionary<double, int> a = new Dictionary<double, int>();
         private bool CheckingOfAllInputHaveSDRorNot(Dictionary<double, List<int[]>> inputofSDRspercycle, int lengthoftotalinputs, bool SDRofallinputs)
         {
