@@ -395,12 +395,12 @@ namespace NeoCortexApiSample
                 Debug.WriteLine($"Input: {input} SDR: {Helpers.StringifyVector(actCols)}");
             }
         }
-        //<summary>
-        //Above activeColumns provides only the column number.
-        //<param name="arrayOfFullActiveColumns">
-        //This arrayOfFullActiveColumns will have full 1024 columns, and whichever columns are active will be 1 and the rest will be zero.
-        //</param>
-        //</summary>
+        ///<summary>
+        ///Above activeColumns provides only the column number.
+        ///</summary>
+        ///<param name="arrayOfFullActiveColumns">
+        ///This arrayOfFullActiveColumns will have full 1024 columns, and whichever columns are active will be 1 and the rest will be zero.
+        ///</param>
         private int[] ConvertingZerosIntoOneAtPreferredIndex(int[] arrayOfFullActiveColumns, int[] activeColumns)
         {
             int j = 0;
@@ -422,10 +422,12 @@ namespace NeoCortexApiSample
             }
             return arrayOfFullActiveColumns;
         }
-        //generates BitMaps from cycle 1 to last cycle(till breaks) for each input.
-        //parameter "twoDimArrayofInput" is a two-dimensional array of arrayOfFullActiveColumns
-        //parameter "input" is for creating the folder for this particular variable
-        //parameter "cycle" is for naming the image
+        /// <summary>
+        /// generates BitMaps from cycle 1 to last cycle(till breaks) for each input
+        /// </summary>
+        /// <param name="twoDimArrayofInput">is a two-dimensional array of arrayOfFullActiveColumns</param>
+        /// <param name="input">is for creating the folder for this particular variable</param>
+        /// <param name="cycle">is for naming the image</param>
         private void DrawBitMapForInputOfEachCycle(int[,] twoDimArrayofInput, double input, int cycle)
         {
             string basePath = Path.Combine(Environment.CurrentDirectory, "Outputs");
@@ -517,27 +519,28 @@ namespace NeoCortexApiSample
             }
             return SDRofAllInputs;
         }
-        //<summary>
-        //<parameter name="inputofSDRspercycle">
-        //This is a dictionary that contains the SDRs per cycle for each input.
-        //</parameter>
-        //<paramer name="array1">
-        //array1 is the final SDR array of the particular that is stored..
-        //</parameter>
-        //<parameter name="array2">
-        //array2 is the previous cycles SDR array of the previous SDR array.
-        //For example, suppose input 0 contains a 10-cycle SDR array. array1 will be the SDR array of cycle 10, and array 2 will be the SDR array of cycle 9.
-        //</parameter>
-        //<parameter name="c">
-        //C is a boolean variable that is set to false. If the lengths of these two arrays are the same, as are all of their SDR values, then this 'c' variable is set to true; otherwise, it is set to false.
-        //</parameter>
-        //When SDRofallinputs=true and the minimumArray count is 2, we begin the comparison.
-        //<parameter name="countForCycle">
-        //This variable counts cycles after isInStableState is set to true, and if two SDR arrays are compared, the value of this variable increases by one.
-        //</parameter>
-        //So, if 'c' returns true, this indicates that all of the conditions for comparing the two arrays have been met, and we are incrementing the variable countForCycle by one.
-        //If 'c' is false, we set the variable countForCycle to zero.
-        //</summary>
+
+        ///<param name="inputOfSDRsPerCycle">
+        ///This is a dictionary that contains the SDRs per cycle for each input.
+        ///</param>
+        ///<param name="array1">
+        ///array1 is the final SDR array of the particular that is stored..
+        ///</param>
+        ///<param name="array2">
+        ///array2 is the previous cycles SDR array of the previous SDR array.
+        ///For example, suppose input 0 contains a 10-cycle SDR array. array1 will be the SDR array of cycle 10, and array 2 will be the SDR array of cycle 9.
+        ///</param>
+        ///<param name="c">
+        ///C is a boolean variable that is set to false. If the lengths of these two arrays are the same, as are all of their SDR values, then this 'c' variable is set to true; otherwise, it is set to false.
+        ///</param>
+        ///When SDRofallinputs=true and the minimumArray count is 2, we begin the comparison.
+        ///<param name="countForCycle">
+        ///This variable counts cycles after isInStableState is set to true, and if two SDR arrays are compared, the value of this variable increases by one.
+        ///</param>
+        ///<summary>
+        ///So, if 'c' returns true, this indicates that all of the conditions for comparing the two arrays have been met, and we are incrementing the variable countForCycle by one.
+        ///If 'c' is false, we set the variable countForCycle to zero.
+        ///</summary>
         private bool ComparingOfSDRsForEachCyclePerInput(Dictionary<double, List<int[]>> inputOfSDRsPerCycle, bool c)
         {
             foreach (var input in inputOfSDRsPerCycle)
@@ -576,6 +579,11 @@ namespace NeoCortexApiSample
             }
             return c;
         }
+        /// <summary>
+        /// Here in this function, printing last 100 cycles column list for each input
+        /// </summary>
+        /// <param name="inputofSDRspercycle">This is a dictionary where this dictionary storing the SDRs of per cycle for each input.</param>
+        /// <param name="cycle2">this is the cycle number in which the cycle breaks</param>
         private void PrintingFinalSDRofAllInputs(Dictionary<double, List<int[]>> inputOfSDRsPerCycle)
         {
             foreach (var input in inputOfSDRsPerCycle)
