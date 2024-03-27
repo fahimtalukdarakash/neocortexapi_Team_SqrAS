@@ -31,7 +31,7 @@ Based on the project description, We have subdivided our tasks and the list of t
 - [**Task 4:**](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-4-write-out-the-dictionary-at-the-end) Write out the dictionary at the end
 - [**Task 5:**](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-5-providing-some-more-readable-statistical-info-about-the-stability-of-all-mini-columns) Providing some more readable statistical info about the stability of all mini-columns.
 
-## Approach
+## Deatails description of the tasks::
 
 ### Task 1: Analyzing the code of spatial pattern learning
 In currently implemented SpatialPatternLearning algorithm, at first it is initialzing the necessary values of `HtmConfig` and `Encoder`. After this setup, 100 random input values was created and then `HtmConfig`, `Encoder` and `inputValues` are passed into `var sp = RunExperiment(cfg, encoder, inputValues)` this method which returns column list of every input values by using spatial pooler algorithm.
@@ -193,7 +193,7 @@ for (int cycle = 0; cycle < maxSPLearningCycles; cycle++)
                     break;
             }
 ```
-At last, currently the existing program checking the boolean variable `isInStableState` is set to true or not for 5 cycles then breaks the loop.
+At last, currently the existing program which is set to run for 1000 iterations checking the boolean variable `isInStableState` is set to true or not for 5 cycles then breaks the loop.
 
 ### Task 2: Investegating the reason, why first 40 cycles don't give mini-columns list of SDR for inputs 51 to 99.
 After analyzing the code, we thought the problem is in `HomeostaticPlasticityController`. To verify that, we ran the program without `HomeostaticPlasticityController` and found that the problem is not there.
@@ -215,8 +215,8 @@ We tried all the algorithms one by one.
  **InhibitColumnsLocalNewApproach(c, overlaps)** this function doesn't take density into account and gives error when there is no  columns for input 51. </br>
  **inhibitColumnsLocalNewApproach2(c, overlaps, density)** this fuction generates all the  columns for input 0 from the beginning. For the first few inputs, it generates too much  columns and after few inputs, the other input's  columns are low and from this function the  columns SDR list are not coming from input 51 to input 99. After cycle 41, it generates a lot of  columns instead of **0.02*numColumns**.</br>
  **inhibitColumnsLocalNewApproach3(c, overlaps, density)** this function doesn't generate any  columns for the inputs.</br>
-  **InhibitColumnsLocalNewApproach11(c, overlaps, density)** this function generates  columns from the beginning for all the inputs but the main problem is, the columns SDR list length is also a lot instead of `0.02*numColumns`. </br>
-  **InhibitColumnsLocalNew(c, overlaps, density)** it also behaves like **inhibitColumnsLocalNewApproach2(c, overlaps, density)** this function. </br>
+ **InhibitColumnsLocalNewApproach11(c, overlaps, density)** this function generates  columns from the beginning for all the inputs but the main problem is, the columns SDR list length is also a lot instead of `0.02*numColumns`. </br>
+ **InhibitColumnsLocalNew(c, overlaps, density)** it also behaves like **inhibitColumnsLocalNewApproach2(c, overlaps, density)** this function. </br>
   
   From our findings, the best one is **InhibitColumnsLocalOriginal(c, overlaps, density)** which is already implemented, because it generates `0.02*numColumns` length of  columns per input for all the inputs after 40 cycles. But the problem of not generating the columns for input 51 to input 99 for the first 40 cycles was still there. 
 As we tried all the inhibition algorithms and found that the problem is not there because inhibition algorithm inhibits columns when there will be minimum one column for one input. So if there are no columns for one input then it will not inhibit the columns for that particular input. Means, those inputs which don't generate columns are not strong enough for those inputs. Hence, we come out to a conclusion that the problem might be in the boosting algorithm where the weak columns are boosted. </br>

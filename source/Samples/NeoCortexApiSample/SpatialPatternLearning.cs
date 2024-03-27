@@ -593,10 +593,14 @@ namespace NeoCortexApiSample
                 Debug.WriteLine($"{i} : {Helpers.StringifyVector(values[values.Count - 1])}"); 
             }
         }
-        //Refactoring method for printing last 100 cycles of Each input
-        private void PrintingLast100CyclesSDRofEachInput(Dictionary<double, List<int[]>> inputOfSDRsPerCycle, int cycle2)
+        /// <summary>
+        /// Here in this function, printing last 100 cycles column list for each input
+        /// </summary>
+        /// <param name="inputofSDRspercycle">This is a dictionary where this dictionary storing the SDRs of per cycle for each input.</param>
+        /// <param name="cycle2">this is the cycle number in which the cycle breaks</param>
+        private void PrintingLast100CyclesSDRofEachInput(Dictionary<double, List<int[]>> inputofSDRspercycle, int cycle2)
         {
-            foreach (var input in inputOfSDRsPerCycle)
+            foreach (var input in inputofSDRspercycle)
             {
                 double i = input.Key;
                 List<int[]> values = input.Value;
@@ -609,15 +613,22 @@ namespace NeoCortexApiSample
                 }
             }
         }
-        // Creating the refactoring method for Printing Stable Cycles number of each input
-        private void PrintingStableCycleNumberOfEachInput(Dictionary<double, int> similarityOfInput, Dictionary<double, int> stableCycleNumberofEachInput, int lengthOfTotalInputs)
+
+        /// <summary>
+        /// Here in this function, printing whether a input is getting stable or not and if a input gets stable then which cycle, it gets stable that is shown
+        /// As well as, in one cycle how many inputs are stable that is also shown.
+        /// </summary>
+        /// <param name="SimilarityOfInput"> the iteration number of an input which similarities is 100%</param>
+        /// <param name="StableCycleNumberofEachInput"> the cycle number in which a particular input is getting stable</param>
+        /// <param name="lengthoftotalinputs">this variable is equal to inputs.length (total inputs)</param>
+        private void PrintingStableCycleNumberOfEachInput(Dictionary<double, int> SimilarityOfInput, Dictionary<double, int> StableCycleNumberofEachInput, int lengthoftotalinputs)
         {
             int count2 = 0;
-            foreach (var input in similarityOfInput)
+            foreach (var input in SimilarityOfInput)
             {
                 double i = input.Key;
                 int value = input.Value;
-                int value2 = stableCycleNumberofEachInput[i];
+                int value2 = StableCycleNumberofEachInput[i];
                 if (value >= 50)
                 {
                     Debug.WriteLine($"input {i}: Stable Input and stable on {value2} cycle");
