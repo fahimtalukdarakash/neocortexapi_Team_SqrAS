@@ -1,5 +1,5 @@
 # ML 23/24-03 Implement the new Spatial Learning experiment
-Group Name: Team_SqrAs [Main Branch](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS)
+[Main Branch](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS)
 
 Implementation of New Spatial Pattern Learning : [Spatial Pattern Learning](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs)
 
