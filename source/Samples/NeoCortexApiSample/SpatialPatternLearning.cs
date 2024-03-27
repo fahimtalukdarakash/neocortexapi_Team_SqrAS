@@ -26,7 +26,7 @@ namespace NeoCortexApiSample
 
             // Used as a boosting parameters
             // that ensure homeostatic plasticity effect.
-            double minOctOverlapCycles = 1.0;
+            double minOctOverlapCycles = 0.45;
             double maxBoost = 5.0;
 
             // We will use 200 bits to represent an input vector (pattern).
@@ -41,7 +41,7 @@ namespace NeoCortexApiSample
             {
                 CellsPerColumn = 10,
                 MaxBoost = maxBoost,
-                DutyCyclePeriod = 100,
+                DutyCyclePeriod = 1000,
                 MinPctOverlapDutyCycles = minOctOverlapCycles,
 
                 GlobalInhibition = false,
@@ -621,7 +621,7 @@ namespace NeoCortexApiSample
         /// <param name="SimilarityOfInput"> the iteration number of an input which similarities is 100%</param>
         /// <param name="StableCycleNumberofEachInput"> the cycle number in which a particular input is getting stable</param>
         /// <param name="lengthoftotalinputs">this variable is equal to inputs.length (total inputs)</param>
-        private void PrintingStableCycleNumberOfEachInput(Dictionary<double, int> SimilarityOfInput, Dictionary<double, int> StableCycleNumberofEachInput, int lengthoftotalinputs)
+        private void PrintingStableCycleNumberOfEachInput(Dictionary<double, int> SimilarityOfInput, Dictionary<double, int> StableCycleNumberofEachInput, int lengthOfTotalInputs)
         {
             int count2 = 0;
             foreach (var input in SimilarityOfInput)
