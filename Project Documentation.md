@@ -607,7 +607,7 @@ When a cycle is less than 100% stable</br>
 ![Stability percentage for all inputs (93% stable)](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/images/Stability%20percentage%20for%20all%20inputs%20in%20a%20cycle%202.png)
 
 4. We also generate the bitmap for each input of every cycle so that we can easily viewed how actually the SDRs are changing for inputs per cycle. Below here, given a video of that represention:</br>
-[![Bitmap Output](https://github.com/fahimtalukdarakash/weather-showing-project/blob/main/Bitmap%20Output%20for%20input%200.png)](https://www.youtube.com/watch?v=RHf9Xz7jz7A)</br>
+[![Bitmap Output](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/images/Bitmap%20Output%20for%20input%200.png)](https://www.youtube.com/watch?v=RHf9Xz7jz7A)</br>
 
 Here the image is shown only for input 0 and if you click the image, it will redirect you to the Youtube video which we uploaded where you will get better representation.
 
