@@ -12,6 +12,10 @@
     <DebugType>full</DebugType>
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
+	<PropertyGroup>
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+		<GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+	</PropertyGroup>
   <ItemGroup>
     <Compile Remove="ImageEncoderTest\**" />
     <Compile Remove="MnistTestImages\**" />

@@ -1301,7 +1301,25 @@ namespace NeoCortexApi
             return ArrayUtils.Divide(overlaps, columnsCounts);
         }
 
-
+        // Getting Connected Input Bits for each column.
+        public Dictionary<int, List<int>> ConnectedInputBits(Connections c)
+        {
+            Dictionary<int, List<int>> columnsConnectedWithInputBits = new Dictionary<int, List<int>>();
+            for (int col = 0; col < c.HtmConfig.NumColumns; col++)
+            {
+                int[] inputBits = c.GetColumn(col).ColumnConnectedWithInputBits();
+                List<int> list = new List<int>();
+                for (int i = 0; i < inputBits.Length; i++)
+                {
+                    if (inputBits[i] == 1)
+                    {
+                        list.Add(i);
+                    }
+                }
+                columnsConnectedWithInputBits.Add(col, list);
+            }
+            return columnsConnectedWithInputBits;
+        }
         /// <summary>
         /// Returns true if enough rounds have passed to warrant updates of duty cycles
         /// </summary>

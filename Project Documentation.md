@@ -611,9 +611,20 @@ When a cycle is less than 100% stable</br>
 
 Here the image is shown only for input 0 and if you click the image, it will redirect you to the Youtube video which we uploaded where you will get better representation.
 
-5. Here is the google sheet link where we tried to tuned the values of the `HtmConfig` and other variables and see for which value we are getting all the input's SDR from which cycle.
+If we run this program for generating bit maps, it takes more time than usually to finish the program. So, this program can be executed without this feature if anyone don't want to see the changes of SDR (mini columns) for every cycle.
+
+5. Showing for a column will be activated by which inputs. For example, column 0 will be activated for input 93, input 94, input 95. Here, in this documentation only first 30 columns output is shown.</br>
+![column activated for which inputs](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/images/Images%20for%20Research%20paper/column%20activated%20for%20which%20inputs.png)</br>
+
+6. Generating bit maps for a column that is connected with the input bits. 
+![Connected input bits for a column](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/images/Images%20for%20Research%20paper/Connected%20input%20bits%20for%20a%20column.png)</br>
+![Bit maps of connected input bits](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/images/Images%20for%20Research%20paper/Bitmap%20of%20connected%20input%20bits%20for%20a%20column.png)</br>
+
+7. Here is the google sheet link where we tried to tuned the values of the `HtmConfig` and other variables and see for which value we are getting all the input's SDR from which cycle.
 [Parameter tuning](https://docs.google.com/spreadsheets/d/1Gt_9ipORZ-UDyoITu21f9JoCJhDZgUQ2c2-MMsRO5lE/edit#gid=447798372)
 
+## Unit Test
+Created Some functions for the project and did the unit tests for those function and successfully passed all the unit tests.
 ## Conclusion
 The SpatialPatternLearning experiment has provided invaluable insights into the capabilities and dynamics of spatial pattern learning within hierarchical temporal memory (HTM) systems. Through meticulous experimentation and analysis, we have demonstrated the efficacy of the program. Our project was to implement the new spatial pattern learning where the program should exit from the loop by a certain condition after the variable `isInStableState` is set to true which we have implemented successfully in our program. It ensures that after the variable `isInStableState` is true, then it's stability will not change by checking consecutive 100 cycles. At the end, dictionary is written. It provides, how many iterations the SDR for the input was not changes. After `isInStableState` is true, counting and showing how many cycles are stable. After each cycle, whether a input is stable or not and if a input is stable then at which it gets stable as well as showing by percentage that how many inputs are stable for that cycle. Generating bitmaps for each input for every cycle to represent how actually the SDRs are changing through cycles for each inputs.</br>
 

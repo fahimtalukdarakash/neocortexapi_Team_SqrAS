@@ -322,6 +322,12 @@ namespace NeoCortexApi.Entities
 
             return result;
         }
+        // getting connected input bits for a column using connectedInputCounter.GetSlice(0) function
+        public int[] ColumnConnectedWithInputBits()
+        {
+            int[] synMap = (int[])this.connectedInputCounter.GetSlice(0);
+            return synMap;
+        }
 
         /// <summary>
         /// Creates the string representation of the given vector.

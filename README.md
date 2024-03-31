@@ -72,7 +72,7 @@ Detail Description: [Documentation](https://github.com/fahimtalukdarakash/neocor
 
 ### Providing some more readable statistical info about the stability of all mini-columns.
 
-Initially, the output is presented as outlined in the project description. Following each cycle, the algorithm indicates whether an input has stabilized and, if so, at which cycle it achieved stability. Additionally, after each cycle, the percentage of stable inputs for that specific cycle is displayed. Bitmaps are generated for each input at every cycle, facilitating a visual understanding of how the SDRs change per input cycle.
+Initially, the output is presented as outlined in the project description. Following each cycle, the algorithm indicates whether an input has stabilized and, if so, at which cycle it achieved stability. Additionally, after each cycle, the percentage of stable inputs for that specific cycle is displayed. Bitmaps are generated for each input at every cycle, facilitating a visual understanding of how the SDRs change per input cycle, showing a column will be activated for which inputs, generated bitmaps for showing a column is connected with which input bits.
 
 Details Description: [Documentation](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-5-providing-some-more-readable-statistical-info-about-the-stability-of-all-mini-columns)
 
