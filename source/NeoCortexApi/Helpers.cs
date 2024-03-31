@@ -274,7 +274,7 @@ namespace NeoCortexApi
         {
             StringBuilder sb = new StringBuilder();
 
-            foreach (var vectorBit in vector)
+            foreach (var vectorBit in vector) 
             {
                 sb.Append(vectorBit);
                 if (separator != null)

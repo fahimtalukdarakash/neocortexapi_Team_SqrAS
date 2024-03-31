@@ -26,7 +26,7 @@ namespace NeoCortexApiSample
 
             // Used as a boosting parameters
             // that ensure homeostatic plasticity effect.
-            double minOctOverlapCycles = 0.5;
+            double minOctOverlapCycles = 0.45;
             double maxBoost = 5.0;
 
             // We will use 200 bits to represent an input vector (pattern).
@@ -169,35 +169,70 @@ namespace NeoCortexApiSample
             // Learning process will take 1000 iterations (cycles)
             int maxSPLearningCycles = 1000;
 
+            ///<param name="spl">spl is just a object of class SpatialPatternLearning</param>
             SpatialPatternLearning spl = new SpatialPatternLearning();
 
             // int numStableCycles = 0;
 
             //Dictionary Initialization && Value Initialization
-            Dictionary<double, List<int[]>> inputofSDRspercycle = new Dictionary<double, List<int[]>>();
+            ///<param name="inputOfSDRsPerCycle">
+            ///This is a dictionary where this dictionary storing the SDRs of per cycle for each input.
+            ///</param>
+            Dictionary<double, List<int[]>> inputOfSDRsPerCycle = new Dictionary<double, List<int[]>>();
+            //Here at first initializing the value of every input with a empty array.
             foreach (var input in inputs)
             {
-                inputofSDRspercycle[input] = new List<int[]>();
+                inputOfSDRsPerCycle[input] = new List<int[]>();
             }
-            bool SDRofallinputs = false;
-            Dictionary<double, int> a = new Dictionary<double, int>();
-            int lengthoftotalinputs = inputs.Length;
+            ///<param name="SDRofAllInputs">
+            ///this is a boolean variable, it is set to false if all inputs don't have SDR array and set to true if all the inputs have SDR array
+            ///</param>
+            bool SDRofAllInputs = false;
+            ///<param name="lengthOfTotalInputs">
+            ///this variable is equal to inputs.length (total inputs)
+            ///</param>
+            int lengthOfTotalInputs = inputs.Length;
+            ///<param name="minimumArray">
+            ///For comparing the SDR values of consecutive two cycles, there should at least 2 arrays of SDRs stored in the dictionary. 
+            ///minimumArraay is for that reason to count the SDR arrays in the dictionary 
+            ///</param>
             int minimumArray = 0;
+            ///<param name="countForCycle">
+            ///This variable is for counting the cycles, after isInStableState set to true and if comparing of two SDR array is matched then this variable's value will increamented by 1.
+            ///</param>
             int countForCycle = 0;
+            ///<param name="minimumArrayNeededToBreakTheCycle">
+            ///this variable is the main breaking points. After how many cycles of comparing the arrays, we will break the main loop. 
+            ///</param>
             int minimumArrayNeededToBreakTheCycle = 100;
+            ///<param name="c">
+            ///c is just boolean variable is set to false. If length of these two arrays same and all the SDR values of these two arrays are same then this 'c' variable set to true otherwise false.
+            ///</param>
             bool c = false;
+            ///<param name="numColumns">
+            ///how many columns is used here. From above, we can see that here number of columns is used as 1024.
+            ///If number of column is used 2048 then here also number of columns should be 2048
+            ///</param>
             int numColumns = 1024;
-
+            /// To take the value of the cycle, in which cycle program will break
             int cycle2 = 0;
-            Dictionary<double, int> SimilarityOfInput = new Dictionary<double, int>();
+            ///<param name="SimilarityOfInput">
+            ///In this dictionary, increasing the iteration number of an input which similarities is 100%
+            ///</param>
+            Dictionary<double, int> similarityOfInput = new Dictionary<double, int>();
+            // at first initializing every input's value with a value of 0.
             foreach (var input in inputs)
             {
-                SimilarityOfInput[input] = 0;
+                similarityOfInput[input] = 0;
             }
-            Dictionary<double, int> StableCycleNumberofEachInput = new Dictionary<double, int>();
+            ///<param name="StableCycleNumberofEachInput">
+            ///In this dictionary, storing the cycle number in which a particular input is getting stable
+            /// </param>
+            Dictionary<double, int> stableCycleNumberofEachInput = new Dictionary<double, int>();
+            // at first initializing every input's value with a value of 0
             foreach (var input in inputs)
             {
-                StableCycleNumberofEachInput[input] = 0;
+                stableCycleNumberofEachInput[input] = 0;
             }
             for (int cycle = 0; cycle < maxSPLearningCycles; cycle++)
             {
@@ -218,48 +253,85 @@ namespace NeoCortexApiSample
                     var activeColumns = cortexLayer.GetResult("sp") as int[];
 
                     var actCols = activeColumns.OrderBy(c => c).ToArray();
-                    
+                    ///<summary>
+                    ///above activeColumns gives only the columns number
+                    ///<param name="arrayOfFullActiveColumns">
+                    ///This arrayOfFullActiveColumns will have full 1024 columns and in that which columns are active that column will be 1 and rest of will be zero
+                    ///</param>
+                    ///</summary>
                     int[] arrayOfFullActiveColumns = Enumerable.Repeat(0, numColumns).ToArray(); // Creates an array of integers with a length of 1024 filled with zeroes
                     arrayOfFullActiveColumns = spl.ConvertingZerosIntoOneAtPreferredIndex(arrayOfFullActiveColumns, activeColumns);
                     similarity = MathHelpers.CalcArraySimilarity(activeColumns, prevActiveCols[input]);
-                    
+                    ///<summary>
+                    ///At first if the similarity is 100% then increasing the value of SimilarityOfInput's value for that particular input
+                    ///Then if that iterations number is increased to 50 then we are storing that cycle number in which the input gets into similarity of 100 for 50 consecutive cycles
+                    ///If some input's similarity is not 100% then giving the value 0 again for that particular input.
+                    ///For example, if input 2 has similarity of 100% for 49 consecutive cycles that means SimilarityOfInput[2]=49, 
+                    ///and in the 50th cycle the similarity is not 100% then the value of SimilarityOfInput[2]=0 again.
+                    /// </summary>
                     if ((int)similarity == 100)
                     {
-                        SimilarityOfInput[input]++;
-                        if (SimilarityOfInput[input] == 50)
+                        similarityOfInput[input]++;
+                        if (similarityOfInput[input] == 50)
                         {
-                            StableCycleNumberofEachInput[input] = cycle;
+                            stableCycleNumberofEachInput[input] = cycle;
                         }
                     }
                     else
                     {
-                        SimilarityOfInput[input] = 0;
+                        similarityOfInput[input] = 0;
                     }
 
-                    Debug.WriteLine($"[cycle={cycle.ToString("D4")}, N={SimilarityOfInput[input]}, i={input}, cols=:{actCols.Length} s={similarity}, stable for {countForCycle} cycles] SDR: {Helpers.StringifyVector(actCols)}");
-                    
-                    int[,] twoDimArrayofInput = ArrayUtils.Make2DArray<int>(arrayOfFullActiveColumns, (int)Math.Sqrt(numColumns), (int)Math.Sqrt(numColumns));
-                    
-                    spl.DrawBitMapForInputOfEachCycle(twoDimArrayofInput, input, cycle);
+                    Debug.WriteLine($"[cycle={cycle.ToString("D4")}, N={similarityOfInput[input]}, i={input}, cols=:{actCols.Length} s={similarity}, stable for {countForCycle} cycles] SDR: {Helpers.StringifyVector(actCols)}");
+                    ///<summary>
+                    ///<param name="twoDimArrayofInput">
+                    ///converting the arrayOfFullActiveColumns into two dimensional array
+                    /// </param>
+                    ///</summary>
+                    //int[,] twoDimArrayofInput = ArrayUtils.Make2DArray<int>(arrayOfFullActiveColumns, (int)Math.Sqrt(numColumns), (int)Math.Sqrt(numColumns));
+                    ///<summary>
+                    ///In this function, generating BitMaps for each input in every cycle so that we can understand how SDRs are changing for input in each cycle.
+                    /// </summary>
+                    //spl.DrawBitMapForInputOfEachCycle(twoDimArrayofInput, input, cycle);
                     //Dictionary, Inpput save if the isInStableState is true
                     //Without the stable value dictionary values will not be saved and shows no value
                     if (isInStableState == true)
                     {
-                        inputofSDRspercycle[input].Add(actCols);
+                        inputOfSDRsPerCycle[input].Add(actCols);
                     }
 
                     prevActiveCols[input] = activeColumns;
                     prevSimilarity[input] = similarity;
                 }
-                
-                spl.PrintingStableCycleNumberOfEachInput(SimilarityOfInput, StableCycleNumberofEachInput, lengthoftotalinputs);
-                
-                SDRofallinputs = spl.CheckingOfAllInputHaveSDRorNot(inputofSDRspercycle, lengthoftotalinputs, SDRofallinputs);
-                if (SDRofallinputs == true) minimumArray++;
-                
-                if (SDRofallinputs == true && isInStableState == false)
+
+                ///<summary>
+                ///In this function, printing the cycle in which an input gets stable as well as how many inputs are stable in that cycle.
+                /// </summary>
+                spl.PrintingStableCycleNumberOfEachInput(similarityOfInput, stableCycleNumberofEachInput, lengthOfTotalInputs);
+
+                ///<summary>
+                ///Here, checking whether all the inputs have SDR columns or not.
+                ///The reason behind this is, stability is checked by input wise not cycle wise so isInStableState can be set to true in the middile of a cycle.
+                ///When isInStableState sets true, at first time some inputs will not have the SDRs and rest of the inputs will have SDRs.
+                ///So we have to check whether all the input has SDRs or not.
+                ///Here, also checking whether a input have minimum two arrays of SDRs or not because for comparing the SDRs for one input per cycle, need minimum two arrays of SDRs.
+                ///<param name="inputofSDRspercycle">
+                ///This is a dictionary where this dictionary storing the SDRs of per cycle for each input.
+                ///</param>
+                ///</summary>
+                SDRofAllInputs = spl.CheckingOfAllInputHaveSDRorNot(inputOfSDRsPerCycle, lengthOfTotalInputs, SDRofAllInputs);
+                if (SDRofAllInputs == true) minimumArray++;
+                ///<summary>
+                ///Sometimes when isInStableState variable turns true after some cycles it agains turns false that means at that time the variable SDRofallinputs=true and isInStableState=false
+                ///So when isInStableState = false, have to clear all the previous stored value of the dictionary as well as setting the necessery values to it's initial value
+                ///<param name="countForCycle">
+                ///This variable is for counting the cycles, after isInStableState set to true and if comparing of two SDR array is matched then this variable's value will increamented by 1.
+                ///</param>
+                ///So when isInStableState turns false again, have to set the value of countForCycle to 0.
+                ///</summary>
+                if (SDRofAllInputs == true && isInStableState == false)
                 {
-                    foreach (var input in inputofSDRspercycle)
+                    foreach (var input in inputOfSDRsPerCycle)
                     {
                         double i = input.Key;
                         List<int[]> values = input.Value;
@@ -268,16 +340,15 @@ namespace NeoCortexApiSample
                     }
                     //When the program is in Stable state and then again turns into false 
                     //then we reset all the values so that the values can again start from the beginning
-                    SDRofallinputs = false;
+                    SDRofAllInputs = false;
                     minimumArray = 0;
                     countForCycle = 0;
                 }
 
-
-                if (SDRofallinputs == true && minimumArray >= 2)
+                if (SDRofAllInputs == true && minimumArray >= 2)
                 {
 
-                    c = spl.ComparingOfSDRsForEachCyclePerInput(inputofSDRspercycle, c);
+                    c = spl.ComparingOfSDRsForEachCyclePerInput(inputOfSDRsPerCycle, c);
                     if (c == true)
                     {
                         countForCycle++;
@@ -287,7 +358,7 @@ namespace NeoCortexApiSample
                         countForCycle = 0;
                     }
                 }
-                
+
                 //Condition checking When the cycle count match with given minimum number of cycles then the program will break
                 if (countForCycle == minimumArrayNeededToBreakTheCycle)
                 {
@@ -303,10 +374,10 @@ namespace NeoCortexApiSample
                     break;*/
             }
             // This function prints the dictionary containing the last 100 cycles' SDR values for each input.
-            spl.PrintingLast100CyclesSDRofEachInput(inputofSDRspercycle, cycle2);
+            spl.PrintingLast100CyclesSDRofEachInput(inputOfSDRsPerCycle, cycle2);
             Debug.WriteLine("Final SDR of all inputs");
             //Outputs the final column list for each input.
-            spl.PrintingFinalSDRofAllInputs(inputofSDRspercycle);
+            spl.PrintingFinalSDRofAllInputs(inputOfSDRsPerCycle);
             return sp;
         }
         private void RunRustructuringExperiment(SpatialPooler sp, EncoderBase encoder, List<double> inputValues)
@@ -324,12 +395,12 @@ namespace NeoCortexApiSample
                 Debug.WriteLine($"Input: {input} SDR: {Helpers.StringifyVector(actCols)}");
             }
         }
-        //<summary>
-        //Above activeColumns provides only the column number.
-        //<parameter name="arrayOfFullActiveColumns">
-        //This arrayOfFullActiveColumns will have full 1024 columns, and whichever columns are active will be 1 and the rest will be zero.
-        //</parameter>
-        //</summary>
+        ///<summary>
+        ///Above activeColumns provides only the column number.
+        ///</summary>
+        ///<param name="arrayOfFullActiveColumns">
+        ///This arrayOfFullActiveColumns will have full 1024 columns, and whichever columns are active will be 1 and the rest will be zero.
+        ///</param>
         private int[] ConvertingZerosIntoOneAtPreferredIndex(int[] arrayOfFullActiveColumns, int[] activeColumns)
         {
             int j = 0;
@@ -351,10 +422,12 @@ namespace NeoCortexApiSample
             }
             return arrayOfFullActiveColumns;
         }
-        //generates BitMaps from cycle 1 to last cycle(till breaks) for each input.
-        //parameter "twoDimArrayofInput" is a two-dimensional array of arrayOfFullActiveColumns
-        //parameter "input" is for creating the folder for this particular variable
-        //parameter "cycle" is for naming the image
+        /// <summary>
+        /// generates BitMaps from cycle 1 to last cycle(till breaks) for each input
+        /// </summary>
+        /// <param name="twoDimArrayofInput">is a two-dimensional array of arrayOfFullActiveColumns</param>
+        /// <param name="input">is for creating the folder for this particular variable</param>
+        /// <param name="cycle">is for naming the image</param>
         private void DrawBitMapForInputOfEachCycle(int[,] twoDimArrayofInput, double input, int cycle)
         {
             string basePath = Path.Combine(Environment.CurrentDirectory, "Outputs");
@@ -385,15 +458,15 @@ namespace NeoCortexApiSample
         //This is a dictionary that stores the number of SDRs per cycle for each input.
         //This is another dictionary that stores 0 and 1 for each input based on whether the input has an SDR array or not by checking the SDR array length.
         //If an input contains an SDR array, the length of the array must be greater than zero. If the length of the SDR array is greater than zero, then a[input]=1 or a[input]=0.        
-        
+
         static Dictionary<double, int> a = new Dictionary<double, int>();
-        private bool CheckingOfAllInputHaveSDRorNot(Dictionary<double, List<int[]>> inputofSDRspercycle, int lengthoftotalinputs, bool SDRofallinputs)
+        private bool CheckingOfAllInputHaveSDRorNot(Dictionary<double, List<int[]>> inputOfSDRsPerCycle, int lengthOfTotalInputs, bool SDRofAllInputs)
         {
             //Dictionary<double, int> a = new Dictionary<double, int>();
-            foreach (var input in inputofSDRspercycle)
+            foreach (var input in inputOfSDRsPerCycle)
             {
                 //Checking all the input has SDR or not.
-                if (SDRofallinputs == false)
+                if (SDRofAllInputs == false)
                 {
                     double i = input.Key;
                     List<int[]> values = input.Value;
@@ -416,7 +489,20 @@ namespace NeoCortexApiSample
                     break;
                 }
 
-            }        
+            }
+            ///<summary>
+            ///<param name="count">
+            ///From the dictionary 'a', getting whether a[input] = 1 or a[input] = 0 
+            ///if a[input] = 1 then count will be added by 1 and if all a[input] = 1 then total count will be equal to length of total inputs. 
+            ///When count is equal to length of total inputs then setting the variable SDRofallinputs=true.
+            ///</param>
+            ///<param name="SDRofAllInputs">
+            ///this is a boolean variable, it is set to false if all inputs don't have SDR array and set to true if all the inputs have SDR array
+            ///</param>
+            ///<param name="lengthoftotalinputs">
+            ///this variable is equal to inputs.length (total inputs)
+            ///</param>
+            ///</summary>
             int count = 0;
             foreach (var b in a)
             {
@@ -426,13 +512,14 @@ namespace NeoCortexApiSample
                     //Console.WriteLine(count);
                 }
             }
-            if (count == lengthoftotalinputs)
+            if (count == lengthOfTotalInputs)
             {
-                SDRofallinputs = true;
+                SDRofAllInputs = true;
                 //Console.WriteLine("full SDR of input done");
             }
-            return SDRofallinputs;
+            return SDRofAllInputs;
         }
+<<<<<<< HEAD
         //<summary>
         //<parameter name="inputofSDRspercycle">
         //This is a dictionary that contains the SDRs per cycle for each input.
@@ -457,8 +544,33 @@ namespace NeoCortexApiSample
 
         //</summary>
         private bool ComparingOfSDRsForEachCyclePerInput(Dictionary<double, List<int[]>> inputofSDRspercycle, bool c)
+=======
+
+        ///<param name="inputOfSDRsPerCycle">
+        ///This is a dictionary that contains the SDRs per cycle for each input.
+        ///</param>
+        ///<param name="array1">
+        ///array1 is the final SDR array of the particular that is stored..
+        ///</param>
+        ///<param name="array2">
+        ///array2 is the previous cycles SDR array of the previous SDR array.
+        ///For example, suppose input 0 contains a 10-cycle SDR array. array1 will be the SDR array of cycle 10, and array 2 will be the SDR array of cycle 9.
+        ///</param>
+        ///<param name="c">
+        ///C is a boolean variable that is set to false. If the lengths of these two arrays are the same, as are all of their SDR values, then this 'c' variable is set to true; otherwise, it is set to false.
+        ///</param>
+        ///When SDRofallinputs=true and the minimumArray count is 2, we begin the comparison.
+        ///<param name="countForCycle">
+        ///This variable counts cycles after isInStableState is set to true, and if two SDR arrays are compared, the value of this variable increases by one.
+        ///</param>
+        ///<summary>
+        ///So, if 'c' returns true, this indicates that all of the conditions for comparing the two arrays have been met, and we are incrementing the variable countForCycle by one.
+        ///If 'c' is false, we set the variable countForCycle to zero.
+        ///</summary>
+        private bool ComparingOfSDRsForEachCyclePerInput(Dictionary<double, List<int[]>> inputOfSDRsPerCycle, bool c)
+>>>>>>> ffd8404fd29cba7aae9371d0e7724695b2395c36
         {
-            foreach (var input in inputofSDRspercycle)
+            foreach (var input in inputOfSDRsPerCycle)
             {
                 double i = input.Key;
                 List<int[]> values = input.Value;
@@ -480,6 +592,7 @@ namespace NeoCortexApiSample
                         else
                         {
                             c = false;
+                            break;
 
                         }
                     }
@@ -493,16 +606,25 @@ namespace NeoCortexApiSample
             }
             return c;
         }
-        private void PrintingFinalSDRofAllInputs(Dictionary<double, List<int[]>> inputofSDRspercycle)
+        /// <summary>
+        /// Here in this function, printing last 100 cycles column list for each input
+        /// </summary>
+        /// <param name="inputofSDRspercycle">This is a dictionary where this dictionary storing the SDRs of per cycle for each input.</param>
+        /// <param name="cycle2">this is the cycle number in which the cycle breaks</param>
+        private void PrintingFinalSDRofAllInputs(Dictionary<double, List<int[]>> inputOfSDRsPerCycle)
         {
-            foreach (var input in inputofSDRspercycle)
+            foreach (var input in inputOfSDRsPerCycle)
             {
                 double i = input.Key;
                 List<int[]> values = input.Value;
                 Debug.WriteLine($"{i} : {Helpers.StringifyVector(values[values.Count - 1])}"); 
             }
         }
-        //Refactoring method for printing last 100 cycles of Each input
+        /// <summary>
+        /// Here in this function, printing last 100 cycles column list for each input
+        /// </summary>
+        /// <param name="inputofSDRspercycle">This is a dictionary where this dictionary storing the SDRs of per cycle for each input.</param>
+        /// <param name="cycle2">this is the cycle number in which the cycle breaks</param>
         private void PrintingLast100CyclesSDRofEachInput(Dictionary<double, List<int[]>> inputofSDRspercycle, int cycle2)
         {
             foreach (var input in inputofSDRspercycle)
@@ -518,8 +640,15 @@ namespace NeoCortexApiSample
                 }
             }
         }
-        // Creating the refactoring method for Printing Stable Cycles number of each input
-        private void PrintingStableCycleNumberOfEachInput(Dictionary<double, int> SimilarityOfInput, Dictionary<double, int> StableCycleNumberofEachInput, int lengthoftotalinputs)
+
+        /// <summary>
+        /// Here in this function, printing whether a input is getting stable or not and if a input gets stable then which cycle, it gets stable that is shown
+        /// As well as, in one cycle how many inputs are stable that is also shown.
+        /// </summary>
+        /// <param name="SimilarityOfInput"> the iteration number of an input which similarities is 100%</param>
+        /// <param name="StableCycleNumberofEachInput"> the cycle number in which a particular input is getting stable</param>
+        /// <param name="lengthoftotalinputs">this variable is equal to inputs.length (total inputs)</param>
+        private void PrintingStableCycleNumberOfEachInput(Dictionary<double, int> SimilarityOfInput, Dictionary<double, int> StableCycleNumberofEachInput, int lengthOfTotalInputs)
         {
             int count2 = 0;
             foreach (var input in SimilarityOfInput)
@@ -537,7 +666,7 @@ namespace NeoCortexApiSample
                     Debug.WriteLine($"input {i}: Not stable Input ");
                 }
             }
-            double stabilityPercentageOfCycle = ((double)count2 / lengthoftotalinputs) * 100;
+            double stabilityPercentageOfCycle = ((double)count2 / lengthOfTotalInputs) * 100;
             Debug.WriteLine($"{stabilityPercentageOfCycle}% stable");
         }
     }
