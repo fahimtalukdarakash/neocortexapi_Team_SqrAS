@@ -669,5 +669,37 @@ namespace NeoCortexApiSample
             double stabilityPercentageOfCycle = ((double)count2 / lengthOfTotalInputs) * 100;
             Debug.WriteLine($"{stabilityPercentageOfCycle}% stable");
         }
+        //In this finction, for which input which columns are activating is defined 
+        //Ex: Suppose mini coulmn 0 is activated for input 3,,6,8,11,23,88. From this function, this can be defined for all columns and also can be represented
+        private void PrintingAllTheColumnOfWhichInputsWillBeActivated(Dictionary<double, List<int[]>> inputofSDRspercycle, int numColumns)
+        {
+            Dictionary<double, int[]> finalSDRofAllInputs = new Dictionary<double, int[]>();
+            foreach (var input in inputofSDRspercycle)
+            {
+                double i = input.Key;
+                List<int[]> values = input.Value;
+                finalSDRofAllInputs.Add(i, values[values.Count - 1]);
+            }
+            Dictionary<int, List<double>> InputsWillActivatedForAColumn = new Dictionary<int, List<double>>();
+            for (int i = 0; i < numColumns; i++)
+            {
+                InputsWillActivatedForAColumn[i] = new List<double>();
+            }
+            foreach (var input in finalSDRofAllInputs)
+            {
+                double i = input.Key;
+                int[] values = input.Value;
+                foreach (var value in values)
+                {
+                    InputsWillActivatedForAColumn[value].Add(i);
+                }
+            }
+            foreach (var column in InputsWillActivatedForAColumn)
+            {
+                int i = column.Key;
+                List<double> values = column.Value;
+                Debug.WriteLine($"{i} : {Helpers.StringifyVector(values)}");
+            }
+        }
     }
 }
