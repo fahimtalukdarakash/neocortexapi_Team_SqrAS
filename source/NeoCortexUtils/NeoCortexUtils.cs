@@ -126,6 +126,57 @@ namespace NeoCortex
 
             myBitmap.Save(filePath, ImageFormat.Png);
         }
+        /// <summary>
+        /// This Draw Bit Map is for the representation of connected input bits
+        /// for example if a input bit has 200 bits (in which the encoding happens)
+        /// a column will be connected with some of the input bits out of 200 input bits
+        /// this draw bit map is for to show that connected input bits for a column
+        /// </summary>
+        /// <param name="twoDimArray"></param>
+        /// <param name="scale"></param>
+        /// <param name="filePath"></param>
+        /// <param name="inactiveCellColor"></param>
+        /// <param name="activeCellColor"></param>
+        /// <param name="text"></param>
+        public static void DrawBitmap2(int[,] twoDimArray, int scale, String filePath, Color inactiveCellColor, Color activeCellColor, string text = null)
+        {
+            int h = twoDimArray.GetLength(0); // Number of rows
+            int w = twoDimArray.GetLength(1); // Number of columns
+
+            // Create a bitmap with transposed dimensions
+            System.Drawing.Bitmap myBitmap = new System.Drawing.Bitmap(h * scale, w * scale);
+
+            // Loop through the transposed array
+            for (int Xcount = 0; Xcount < h; Xcount++)
+            {
+                for (int Ycount = 0; Ycount < w; Ycount++)
+                {
+                    // Loop through the scale factor for each element
+                    for (int padX = 0; padX < scale; padX++)
+                    {
+                        for (int padY = 0; padY < scale; padY++)
+                        {
+                            // Access the transposed element from the original array
+                            if (twoDimArray[Xcount, Ycount] == 1) // No need to reverse indexing here
+                            {
+                                myBitmap.SetPixel(Ycount * scale + padX, Xcount * scale + padY, activeCellColor);
+                            }
+                            else
+                            {
+                                myBitmap.SetPixel(Ycount * scale + padX, Xcount * scale + padY, inactiveCellColor);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Draw text and save the bitmap as before
+            Graphics g = Graphics.FromImage(myBitmap);
+            var fontFamily = new FontFamily(System.Drawing.Text.GenericFontFamilies.SansSerif);
+            g.DrawString(text, new Font(fontFamily, 32), SystemBrushes.Control, new PointF(0, 0));
+
+            myBitmap.Save(filePath, ImageFormat.Png);
+        }
 
         /// <summary>
         /// TODO: add comment
