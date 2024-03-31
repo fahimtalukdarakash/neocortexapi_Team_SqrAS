@@ -453,6 +453,8 @@ namespace NeoCortexApiSample
         //</parameter>
         //So, if 'c' returns true, this indicates that all of the conditions for comparing the two arrays have been met, and we are incrementing the variable countForCycle by one.
         //If 'c' is false, we set the variable countForCycle to zero.
+
+
         //</summary>
         private bool ComparingOfSDRsForEachCyclePerInput(Dictionary<double, List<int[]>> inputofSDRspercycle, bool c)
         {

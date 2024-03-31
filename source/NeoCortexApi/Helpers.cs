@@ -256,6 +256,33 @@ namespace NeoCortexApi
 
             return sb.ToString();
         }
+        public static string StringifyVector(List<double> vector, string separator = ", ")
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var vectorBit in vector)
+            {
+                sb.Append(vectorBit);
+                if (separator != null)
+                    sb.Append(separator);
+            }
+
+            return sb.ToString();
+        }
+
+        public static string StringifyVector(List<int> vector, string separator = ", ")
+        {
+            StringBuilder sb = new StringBuilder();
+
+            foreach (var vectorBit in vector)
+            {
+                sb.Append(vectorBit);
+                if (separator != null)
+                    sb.Append(separator);
+            }
+
+            return sb.ToString();
+        }
 
 
         public static List<string> DefaultNodeList
