@@ -2,19 +2,20 @@
 [![buildStatus](https://github.com/ddobric/neocortexapi/workflows/.NET%20Core/badge.svg)](https://github.com/ddobric/neocortexapi/actions?query=workflow%3A%22.NET+Core%22)
 # ML 23/24-03 Implement the new Spatial Learning experiment
 
+Forked from: [neocortexapi] (https://github.com/ddobric/neocortexapi)
 [Main Branch](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS)
 
-Implementation of New Spatial Pattern Learning : [Spatial Pattern Learning](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs)</br>
-Code Added: [172-236 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L172C1-L236C14)</br>
-Code Added: [256-263 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L256C1-L263C132)</br>
-Code Added: [265-283 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L265C1-L283C22)</br>
-Code Added: [286-301 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L286C1-L301C22)</br>
-Code Added: [307-380 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L307C1-L380C66)</br>
-Code Added: [398-424 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L398C1-L424C10)</br>
-Code Added: [425-451 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L398C1-L424C10)</br>
-Code Added: [453-522 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L453C1-L522C1)</br>
-Code Added: [523-581 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L523C1-L581C10)</br>
-Code Added: [582-646 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L582C1-L646C2)</br>
+Implementation of New Spatial Pattern Learning : [Spatial Pattern Learning](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs) </br>
+Code Added: [172-236 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L172C1-L236C14) </br>
+Code Added: [256-263 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L256C1-L263C132) </br>
+Code Added: [265-283 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L265C1-L283C22) </br>
+Code Added: [286-301 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L286C1-L301C22) </br>
+Code Added: [307-380 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L307C1-L380C66) </br>
+Code Added: [398-424 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L398C1-L424C10) </br>
+Code Added: [425-451 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L398C1-L424C10) </br>
+Code Added: [453-522 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L453C1-L522C1) </br>
+Code Added: [523-581 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L523C1-L581C10) </br>
+Code Added: [582-646 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L582C1-L646C2) </br>
 
 Applying Boosting Algorithm in Spatial Pooler Algorithm: [Boosting of Columns with Low Overlap](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/source/NeoCortexApi/SpatialPooler.cs)</br>
 Code added: [680-722 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/aa74a4ef6155784d7d0abc14669e817eab47d111/source/NeoCortexApi/SpatialPooler.cs#L680C1-L723C1)</br>
@@ -64,17 +65,28 @@ After achieving stability, indicated by the variable isInStableState being true,
 
 Detail Description: [Documentation](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-3-implementing-new-spatial-pattern-learning-experiment)
 
+### Statistical information regarding Spatial Pattern Learning experiment
+In the Spatial Pattern Learning experiment, during the execution of the program some statistical information has been extracted and visualised for further understaning. Here is the list of information shown in the new experiment:
+- Info-1: Checking which input is getting stable at which cycle
+- Info-2: Checking the percentage of stable input in every cycle
+- Info-3: Generating Bitmaps to see how the SDRs is changing in every cycle for each input
+- Info-4: Which column will be activated for which inputs during the experiment 
+- Info-5: **Parameter Tuning** which shows the SDR and cycles stability for different tuned parameter
+
 # Result
 
-### Write out the dictionary at the end
+After successfully implementing the experiment, this program shows the exceted output in different manner. Firstly, write out the dictionary for the stable cycles outputs.
+
+### Write out the dictionary at the end of the experiment
 After breaking the loop, printing the dictionary at the end.
 Detail Description: [Documentation](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-4-write-out-the-dictionary-at-the-end) 
 
-### Providing some more readable statistical info about the stability of all mini-columns.
+### Statistical info about the stability of all mini-columns
 
 Initially, the output is presented as outlined in the project description. Following each cycle, the algorithm indicates whether an input has stabilized and, if so, at which cycle it achieved stability. Additionally, after each cycle, the percentage of stable inputs for that specific cycle is displayed. Bitmaps are generated for each input at every cycle, facilitating a visual understanding of how the SDRs change per input cycle, showing a column will be activated for which inputs, generated bitmaps for showing a column is connected with which input bits.
 
-Details Description: [Documentation](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-5-providing-some-more-readable-statistical-info-about-the-stability-of-all-mini-columns)
+- Statistical Informations Details Description: [Documentation](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-5-providing-some-more-readable-statistical-info-about-the-stability-of-all-mini-columns)
+
 
 # Conclusion
 
