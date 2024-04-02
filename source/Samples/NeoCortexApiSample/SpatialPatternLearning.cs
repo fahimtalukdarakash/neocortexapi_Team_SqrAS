@@ -676,6 +676,7 @@ namespace NeoCortexApiSample
                 Debug.WriteLine($"{i} : {Helpers.StringifyVector(values)}");
             }
         }
+        //Drawing Bitmaps of connected input bits for each column
         private void DrawBitMapOfConnectedInputBitsForColumns(Connections mem)
         {
             SpatialPooler sp = new SpatialPooler();
