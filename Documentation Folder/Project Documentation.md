@@ -607,6 +607,7 @@ When a cycle is less than 100% stable</br>
 ![Stability percentage for all inputs (93% stable)](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/images/Stability%20percentage%20for%20all%20inputs%20in%20a%20cycle%202.png)
 
 4. We also generate the bitmap for each input of every cycle so that we can easily viewed how actually the SDRs are changing for inputs per cycle. Below here, given a video of that represention:</br>
+The images can be shown in this folder structure `..\source\Samples\NeoCortexApiSample\bin\Debug\net8.0\Outputs`</br>
 [![Bitmap Output](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/images/Bitmap%20Output%20for%20input%200.png)](https://www.youtube.com/watch?v=RHf9Xz7jz7A)</br>
 
 Here the image is shown only for input 0 and if you click the image, it will redirect you to the Youtube video which we uploaded where you will get better representation.
@@ -618,6 +619,7 @@ If we run this program for generating bit maps, it takes more time than usually 
 
 6. Generating bit maps for a column that is connected with the input bits. 
 ![Connected input bits for a column](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/images/Images%20for%20Research%20paper/Connected%20input%20bits%20for%20a%20column.png)</br>
+The images can be shown in this folder structure `..\source\Samples\NeoCortexApiSample\bin\Debug\net8.0\OutputInputBits`</br>
 ![Bit maps of connected input bits](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/images/Images%20for%20Research%20paper/Bitmap%20of%20connected%20input%20bits%20for%20a%20column.png)</br>
 
 7. Here is the google sheet link where we tried to tuned the values of the `HtmConfig` and other variables and see for which value we are getting all the input's SDR from which cycle.

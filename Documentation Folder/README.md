@@ -6,19 +6,26 @@ Forked from: [neocortexapi] (https://github.com/ddobric/neocortexapi)
 [Main Branch](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS)
 
 Implementation of New Spatial Pattern Learning : [Spatial Pattern Learning](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs) </br>
-Code Added: [172-236 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L172C1-L236C14) </br>
-Code Added: [256-263 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L256C1-L263C132) </br>
-Code Added: [265-283 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L265C1-L283C22) </br>
-Code Added: [286-301 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L286C1-L301C22) </br>
-Code Added: [307-380 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L307C1-L380C66) </br>
-Code Added: [398-424 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L398C1-L424C10) </br>
-Code Added: [425-451 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L398C1-L424C10) </br>
-Code Added: [453-522 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L453C1-L522C1) </br>
-Code Added: [523-581 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L523C1-L581C10) </br>
-Code Added: [582-646 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/bbfab249cb11380daee1b2de9d93a60845f25c97/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L582C1-L646C2) </br>
+Code Added: [172-236 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/4a61b7bf2ddfb28020ac9c751740fc19c28b38df/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L172C13-L236C14) </br>
+Code Added: [256-263 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/4a61b7bf2ddfb28020ac9c751740fc19c28b38df/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L256C20-L263C132) </br>
+Code Added: [265-283 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/4a61b7bf2ddfb28020ac9c751740fc19c28b38df/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L265C20-L283C22) </br>
+Code Added: [285-301 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/4a61b7bf2ddfb28020ac9c751740fc19c28b38df/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L285C20-L301C22) </br>
+Code Added: [307-382 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L307C14-L382C63) </br>
+Code Added: [400-708 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/4a61b7bf2ddfb28020ac9c751740fc19c28b38df/source/Samples/NeoCortexApiSample/SpatialPatternLearning.cs#L400) </br>
 
 Applying Boosting Algorithm in Spatial Pooler Algorithm: [Boosting of Columns with Low Overlap](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/source/NeoCortexApi/SpatialPooler.cs)</br>
 Code added: [680-722 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/aa74a4ef6155784d7d0abc14669e817eab47d111/source/NeoCortexApi/SpatialPooler.cs#L680C1-L723C1)</br>
+
+Code added: [1304-1322 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/4a61b7bf2ddfb28020ac9c751740fc19c28b38df/source/NeoCortexApi/SpatialPooler.cs#L1304C1-L1322C10) </br>
+
+Applying Stringify Function in Helpers.cs: </br>
+Code added: [259-285 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/source/NeoCortexApi/Helpers.cs#L259C1-L285C10)
+
+Creating the Function of Getting Connected Input Bits for a Column in Column.cs: </br>
+Code Added: [325-330 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/source/NeoCortexEntities/Entities/Column.cs#L325C5-L330C10)
+
+Creating a Function of Draw Bit Maps for connected Input Bits in NeoCortexUtils.cs: </br>
+Code Added:[129-171 lines](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/source/NeoCortexUtils/NeoCortexUtils.cs#L129C2-L171C14)
 
 # Abstract
 Spatial pattern learning, particularly in the context of algorithms like the Spatial Pooler in Hierarchical Temporal Memory (HTM) models, refers to the process of learning patterns of activation in a spatially distributed manner. In HTM theory, the Spatial Pooler is a crucial component responsible for learning spatial patterns in the input data. It receives sparse binary input signals (often encoded from sensory data) and learns to create a sparse distributed representation (SDR) of the input in a high-dimensional space. Spatial pattern learning is valuable for a wide range of applications, including sensory data processing, anomaly detection, pattern recognition, and predictive modeling. Its efficiency, robustness, and adaptability make it a powerful tool for building intelligent systems that can learn from and interact with complex real-world environments. The previous experiment of Spatial Pattern Learning wasn’t efficient as it didn’t give the SDR (mini columns) of inputs 51 to 99 for the first 40 cycles and ran for 1000 iterations which isn’t time efficient. This new Spatial Pattern Learning, at first, it will resolve the issue of not giving the SDR for inputs 51 to 99, then it will break the iterations by matching some criteria as well as give statistical information and better representation of SDRs to show how it changes in each cycle of Spatial Pattern Learning.
@@ -71,7 +78,8 @@ In the Spatial Pattern Learning experiment, during the execution of the program 
 - Info-2: Checking the percentage of stable input in every cycle
 - Info-3: Generating Bitmaps to see how the SDRs is changing in every cycle for each input
 - Info-4: Which column will be activated for which inputs during the experiment 
-- Info-5: **Parameter Tuning** which shows the SDR and cycles stability for different tuned parameter
+- Info-5: Generating bit maps for a column that is connected with the input bits
+- Info-6: **Parameter Tuning** which shows the SDR and cycles stability for different tuned parameter
 
 # Result
 
