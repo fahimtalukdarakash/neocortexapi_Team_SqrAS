@@ -38,7 +38,7 @@ Spatial Pattern Learning using Sparse Distributed Representations (SDRs) represe
 ### Analyzing the Code of Spatial Pattern Learning Experiment
 The implemented SpatialPatternLearning algorithm begins by initializing HtmConfig and Encoder values. Random input values are then generated, and the spatial pooler algorithm is applied to obtain a column list for each input. The algorithm utilizes a HomeostaticPlasticityController to manage the learning process, initially setting the spatial pooler in a new-born stage where boosting is active but instability exists. After this stage, the HomeostaticPlasticityController controls the learning process, aiming to stabilize the generated sparse distributed representations (SDRs). The input encoding and column activation are handled by layers added sequentially: Encoder and Spatial Pooler. During 1000 iterations of learning, each input is encoded and processed by the spatial pooler, with the first 40 iterations focusing on stabilizing the column lists. The HomeostaticPlasticityController adjusts column activations, aiming for stability or boosting as needed. Stability is achieved when 97% similarity in column lists is maintained for 50 consecutive cycles. Finally, the program checks for stability over five cycles before terminating.
 
-Detail Description : [Documentation](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-1-analyzing-the-code-of-spatial-pattern-learning)
+Detail Description : [Documentation](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Documentation%20Folder/Project%20Documentation.md#task-1-analyzing-the-code-of-spatial-pattern-learning)
 
 ### Investegating the reason, why first 40 cycles don't give mini-columns list of SDR for inputs 51 to 99.
 
@@ -64,13 +64,13 @@ public virtual void BoostColsWithLowOverlap(Connections c)
 }
 
 ```
-Detail Description : [Documentation](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-2-investegating-the-reason-why-first-40-cycles-dont-give-mini-columns-list-of-sdr-for-inputs-51-to-99)
+Detail Description : [Documentation](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Documentation%20Folder/Project%20Documentation.md#task-2-investegating-the-reason-why-first-40-cycles-dont-give-mini-columns-list-of-sdr-for-inputs-51-to-99)
 
 ### Implementing new spatial pattern learning experiment
 
 After achieving stability, indicated by the variable isInStableState being true, the column lists for each input are stored in a dictionary, indexed by input and cycle number. This storage includes column lists for each input at cycles 384 and 383. Following stability, the algorithm compares column lists for another 100 cycles to detect any changes. If isInStableState turns false again within this period, the algorithm waits for it to return to true over 50 cycles. During this waiting period, the SDR arrays for each input cycle are cleared, and initial values are reset. Once isInStableState is true and SDR arrays are stored, the algorithm compares the last two cycles' SDR arrays for each input. This comparison is repeated for 100 consecutive cycles, resetting the countForCycle variable if mismatches occur. Upon meeting the condition for 100 consecutive matching cycles, the loop terminates.
 
-Detail Description: [Documentation](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-3-implementing-new-spatial-pattern-learning-experiment)
+Detail Description: [Documentation](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Documentation%20Folder/Project%20Documentation.md#task-3-implementing-new-spatial-pattern-learning-experiment)
 
 ### Statistical information regarding Spatial Pattern Learning experiment
 In the Spatial Pattern Learning experiment, during the execution of the program some statistical information has been extracted and visualised for further understaning. Here is the list of information shown in the new experiment:
@@ -87,13 +87,13 @@ After successfully implementing the experiment, this program shows the exceted o
 
 ### Write out the dictionary at the end of the experiment
 After breaking the loop, printing the dictionary at the end.
-Detail Description: [Documentation](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-4-write-out-the-dictionary-at-the-end) 
+Detail Description: [Documentation](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Documentation%20Folder/Project%20Documentation.md#task-4-write-out-the-dictionary-at-the-end) 
 
 ### Statistical info about the stability of all mini-columns
 
 Initially, the output is presented as outlined in the project description. Following each cycle, the algorithm indicates whether an input has stabilized and, if so, at which cycle it achieved stability. Additionally, after each cycle, the percentage of stable inputs for that specific cycle is displayed. Bitmaps are generated for each input at every cycle, facilitating a visual understanding of how the SDRs change per input cycle, showing a column will be activated for which inputs, generated bitmaps for showing a column is connected with which input bits.
 
-- Statistical Informations Details Description: [Documentation](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-5-providing-some-more-readable-statistical-info-about-the-stability-of-all-mini-columns)
+- Statistical Informations Details Description: [Documentation](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Documentation%20Folder/Project%20Documentation.md#task-5-providing-some-more-readable-statistical-info-about-the-stability-of-all-mini-columns)
 
 
 # Conclusion

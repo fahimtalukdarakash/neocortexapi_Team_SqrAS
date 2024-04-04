@@ -677,6 +677,8 @@ namespace NeoCortexApiSample
             }
         }
         //Drawing Bitmaps of connected input bits for each column
+        /// <param name="columnsConnectedWithInputBits"> this defines the connectivity of column between input bits and mini columns</param>
+
         private void DrawBitMapOfConnectedInputBitsForColumns(Connections mem)
         {
             SpatialPooler sp = new SpatialPooler();
