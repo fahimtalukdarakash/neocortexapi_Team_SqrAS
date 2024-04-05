@@ -25,11 +25,11 @@ Use an additional value stable X cycles.
 
 ## 1. Objectives:
 Based on the project description, We have subdivided our tasks and the list of those tasks are as below:
-- [**Task 1:**](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-1-analyzing-the-code-of-spatial-pattern-learning) Analyzing the code of spatial pattern learning
-- [**Task 2:**](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-2-investegating-the-reason-why-first-40-cycles-dont-give-mini-columns-list-of-sdr-for-inputs-51-to-99) Investing the reason, why first 40 cycles don't give mini columns list for inputs 51 to 99.
-- [**Task 3:**](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-3-implementing-new-spatial-pattern-learning-experiment) Implementing new spatial pattern learning experiment.
-- [**Task 4:**](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-4-write-out-the-dictionary-at-the-end) Write out the dictionary at the end
-- [**Task 5:**](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Project%20Documentation.md#task-5-providing-some-more-readable-statistical-info-about-the-stability-of-all-mini-columns) Providing some more readable statistical info about the stability of all mini-columns.
+- [**Task 1:**](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Documentation%20Folder/Project%20Documentation.md#task-1-analyzing-the-code-of-spatial-pattern-learning) Analyzing the code of spatial pattern learning
+- [**Task 2:**](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Documentation%20Folder/Project%20Documentation.md#task-2-investegating-the-reason-why-first-40-cycles-dont-give-mini-columns-list-of-sdr-for-inputs-51-to-99) Investing the reason, why first 40 cycles don't give mini columns list for inputs 51 to 99.
+- [**Task 3:**](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Documentation%20Folder/Project%20Documentation.md#task-3-implementing-new-spatial-pattern-learning-experiment) Implementing new spatial pattern learning experiment.
+- [**Task 4:**](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Documentation%20Folder/Project%20Documentation.md#task-4-write-out-the-dictionary-at-the-end) Write out the dictionary at the end
+- [**Task 5:**](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Documentation%20Folder/Project%20Documentation.md#task-5-providing-some-more-readable-statistical-info-about-the-stability-of-all-mini-columns) Providing some more readable statistical info about the stability of all mini-columns.
 
 ## Deatails description of the tasks::
 
@@ -626,7 +626,8 @@ The images can be shown in this folder structure `..\source\Samples\NeoCortexApi
 [Parameter tuning](https://docs.google.com/spreadsheets/d/1Gt_9ipORZ-UDyoITu21f9JoCJhDZgUQ2c2-MMsRO5lE/edit#gid=447798372)
 
 ## Unit Test
-Created Some functions for the project and did the unit tests for those function and successfully passed all the unit tests.
+Created Some functions for the project and did the unit tests for those function and successfully passed all the unit tests.</br>
+![Unit test](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/images/Images%20for%20Research%20paper/Unit%20test%20success.png)
 ## Conclusion
 The SpatialPatternLearning experiment has provided invaluable insights into the capabilities and dynamics of spatial pattern learning within hierarchical temporal memory (HTM) systems. Through meticulous experimentation and analysis, we have demonstrated the efficacy of the program. Our project was to implement the new spatial pattern learning where the program should exit from the loop by a certain condition after the variable `isInStableState` is set to true which we have implemented successfully in our program. It ensures that after the variable `isInStableState` is true, then it's stability will not change by checking consecutive 100 cycles. At the end, dictionary is written. It provides, how many iterations the SDR for the input was not changes. After `isInStableState` is true, counting and showing how many cycles are stable. After each cycle, whether a input is stable or not and if a input is stable then at which it gets stable as well as showing by percentage that how many inputs are stable for that cycle. Generating bitmaps for each input for every cycle to represent how actually the SDRs are changing through cycles for each inputs.</br>
 
