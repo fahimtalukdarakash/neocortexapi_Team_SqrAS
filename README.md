@@ -87,7 +87,7 @@ After successfully implementing the experiment, this program shows the exceted o
 
 ### Write out the dictionary at the end of the experiment
 After breaking the loop, printing the dictionary at the end.
-Detail Description: [Documentation](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Documentation%20Folder/Project%20Documentation.md#task-4-write-out-the-dictionary-at-the-end) 
+Detail Description: [Documentation](https://github.com/fahimtalukdarakash/neocortexapi_Team_SqrAS/blob/master/Documentation%20Folder/Project%20Documentation.md#task-4-write-out-the-dictionary-at-the-end)
 
 ### Statistical info about the stability of all mini-columns
 
