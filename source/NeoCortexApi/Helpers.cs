@@ -256,6 +256,7 @@ namespace NeoCortexApi
 
             return sb.ToString();
         }
+        // creaeting function for list of vector(double)
         public static string StringifyVector(List<double> vector, string separator = ", ")
         {
             StringBuilder sb = new StringBuilder();
@@ -269,6 +270,7 @@ namespace NeoCortexApi
 
             return sb.ToString();
         }
+        // creating function for list of vector(int)
 
         public static string StringifyVector(List<int> vector, string separator = ", ")
         {

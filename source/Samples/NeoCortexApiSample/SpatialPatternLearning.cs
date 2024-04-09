@@ -18,7 +18,7 @@ namespace NeoCortexApiSample
     /// Implements an experiment that demonstrates how to learn spatial patterns.
     /// SP will learn every presented input in multiple iterations.
     /// </summary>
-    public class SpatialPatternLearning
+    public class SpatialPatternLearning : SPLHelpers
     {
         public void Run()
         {
@@ -288,11 +288,11 @@ namespace NeoCortexApiSample
                     ///converting the arrayOfFullActiveColumns into two dimensional array
                     /// </param>
                     ///</summary>
-                    //int[,] twoDimArrayofInput = ArrayUtils.Make2DArray<int>(arrayOfFullActiveColumns, (int)Math.Sqrt(numColumns), (int)Math.Sqrt(numColumns));
+                    int[,] twoDimArrayofInput = ArrayUtils.Make2DArray<int>(arrayOfFullActiveColumns, (int)Math.Sqrt(numColumns), (int)Math.Sqrt(numColumns));
                     ///<summary>
                     ///In this function, generating BitMaps for each input in every cycle so that we can understand how SDRs are changing for input in each cycle.
                     /// </summary>
-                    //spl.DrawBitMapForInputOfEachCycle(twoDimArrayofInput, input, cycle);
+                    spl.DrawBitMapForInputOfEachCycle(twoDimArrayofInput, input, cycle);
                     //Dictionary, Inpput save if the isInStableState is true
                     //Without the stable value dictionary values will not be saved and shows no value
                     if (isInStableState == true)
@@ -378,6 +378,8 @@ namespace NeoCortexApiSample
             Debug.WriteLine("Final SDR of all inputs");
             //Outputs the final column list for each input.
             spl.PrintingFinalSDRofAllInputs(inputOfSDRsPerCycle);
+            spl.PrintingAllTheColumnOfWhichInputsWillBeActivated(inputOfSDRsPerCycle, numColumns);
+            spl.DrawBitMapOfConnectedInputBitsForColumns(mem);
             return sp;
         }
         private void RunRustructuringExperiment(SpatialPooler sp, EncoderBase encoder, List<double> inputValues)
@@ -519,33 +521,7 @@ namespace NeoCortexApiSample
             }
             return SDRofAllInputs;
         }
-<<<<<<< HEAD
-        //<summary>
-        //<parameter name="inputofSDRspercycle">
-        //This is a dictionary that contains the SDRs per cycle for each input.
-        //</parameter>
-        //<paramer name="array1">
-        //array1 is the final SDR array of the particular that is stored..
-        //</parameter>
-        //<parameter name="array2">
-        //array2 is the previous cycles SDR array of the previous SDR array.
-        //For example, suppose input 0 contains a 10-cycle SDR array. array1 will be the SDR array of cycle 10, and array 2 will be the SDR array of cycle 9.
-        //</parameter>
-        //<parameter name="c">
-        //C is a boolean variable that is set to false. If the lengths of these two arrays are the same, as are all of their SDR values, then this 'c' variable is set to true; otherwise, it is set to false.
-        //</parameter>
-        //When SDRofallinputs=true and the minimumArray count is 2, we begin the comparison.
-        //<parameter name="countForCycle">
-        //This variable counts cycles after isInStableState is set to true, and if two SDR arrays are compared, the value of this variable increases by one.
-        //</parameter>
-        //So, if 'c' returns true, this indicates that all of the conditions for comparing the two arrays have been met, and we are incrementing the variable countForCycle by one.
-        //If 'c' is false, we set the variable countForCycle to zero.
-
-
-        //</summary>
-        private bool ComparingOfSDRsForEachCyclePerInput(Dictionary<double, List<int[]>> inputofSDRspercycle, bool c)
-=======
-
+        
         ///<param name="inputOfSDRsPerCycle">
         ///This is a dictionary that contains the SDRs per cycle for each input.
         ///</param>
@@ -568,7 +544,6 @@ namespace NeoCortexApiSample
         ///If 'c' is false, we set the variable countForCycle to zero.
         ///</summary>
         private bool ComparingOfSDRsForEachCyclePerInput(Dictionary<double, List<int[]>> inputOfSDRsPerCycle, bool c)
->>>>>>> ffd8404fd29cba7aae9371d0e7724695b2395c36
         {
             foreach (var input in inputOfSDRsPerCycle)
             {
@@ -671,10 +646,10 @@ namespace NeoCortexApiSample
         }
         //In this finction, for which input which columns are activating is defined 
         //Ex: Suppose mini coulmn 0 is activated for input 3,,6,8,11,23,88. From this function, this can be defined for all columns and also can be represented
-        private void PrintingAllTheColumnOfWhichInputsWillBeActivated(Dictionary<double, List<int[]>> inputofSDRspercycle, int numColumns)
+        private void PrintingAllTheColumnOfWhichInputsWillBeActivated(Dictionary<double, List<int[]>> inputOfSDRsPerCycle, int numColumns)
         {
             Dictionary<double, int[]> finalSDRofAllInputs = new Dictionary<double, int[]>();
-            foreach (var input in inputofSDRspercycle)
+            foreach (var input in inputOfSDRsPerCycle)
             {
                 double i = input.Key;
                 List<int[]> values = input.Value;
@@ -699,6 +674,37 @@ namespace NeoCortexApiSample
                 int i = column.Key;
                 List<double> values = column.Value;
                 Debug.WriteLine($"{i} : {Helpers.StringifyVector(values)}");
+            }
+        }
+        //Drawing Bitmaps of connected input bits for each column
+        /// <param name="columnsConnectedWithInputBits"> this defines the connectivity of column between input bits and mini columns</param>
+
+        private void DrawBitMapOfConnectedInputBitsForColumns(Connections mem)
+        {
+            SpatialPooler sp = new SpatialPooler();
+            SpatialPatternLearning spl = new SpatialPatternLearning();
+            Dictionary<int, List<int>> columnsConnectedWithInputBits = sp.ConnectedInputBits(mem);
+            foreach (var column in columnsConnectedWithInputBits)
+            {
+                int i = column.Key;
+                List<int> values = column.Value;
+                Debug.WriteLine($"{i} : {Helpers.StringifyVector(values)}");
+            }
+            string basePath = Path.Combine(Environment.CurrentDirectory, "OutputInputBits");
+            if (!Directory.Exists(basePath))
+            {
+                Directory.CreateDirectory(basePath);
+            }
+            int[] arrayOfFullInputBits = new int[mem.HtmConfig.NumInputs];
+            foreach (var column in columnsConnectedWithInputBits)
+            {
+                int i = column.Key;
+                List<int> values = column.Value;
+                int[] inputBits = values.ToArray();
+                arrayOfFullInputBits = Enumerable.Repeat(0, mem.HtmConfig.NumInputs).ToArray(); // Creates an array of integers with a length of 1024 filled with zeroes
+                arrayOfFullInputBits = spl.ConvertingZerosIntoOneAtPreferredIndex(arrayOfFullInputBits, inputBits);
+                int[,] twoDimArrayofInputBits = ArrayUtils.Make2DArray<int>(arrayOfFullInputBits, (int)Math.Sqrt(mem.HtmConfig.NumInputs), (int)Math.Sqrt(mem.HtmConfig.NumInputs));
+                NeoCortexUtils.DrawBitmap2(twoDimArrayofInputBits, 20, $"{basePath}\\column {i}.png", Color.Black, Color.Red, text: i.ToString());
             }
         }
     }
