@@ -43,13 +43,13 @@ namespace NeoCortexApiSample
             }
             return arrayOfFullActiveColumns;
         }
-/// <summary>
-/// Here in this function, generating BitMaps from cycle 1 to last cycle(where it breaks) for each input.
-/// </summary>
-/// <param name="twoDimArrayofInput">Two-dimensional array of arrayOfFullActiveColumns</param>
-/// <param name="input">this is for creating the floder for this particular variable</param>
-/// <param name="cycle">this is for naming the image</param>
-public void DrawBitMapForInputOfEachCycle(int[,] twoDimArrayofInput, double input, int cycle)
+        /// <summary>
+        /// Here in this function, generating BitMaps from cycle 1 to last cycle(where it breaks) for each input.
+        /// </summary>
+        /// <param name="twoDimArrayofInput">Two-dimensional array of arrayOfFullActiveColumns</param>
+        /// <param name="input">this is for creating the floder for this particular variable</param>
+        /// <param name="cycle">this is for naming the image</param>
+        public void DrawBitMapForInputOfEachCycle(int[,] twoDimArrayofInput, double input, int cycle)
         {
             string basePath = Path.Combine(Environment.CurrentDirectory, "Outputs");
             if (!Directory.Exists(basePath))
@@ -191,6 +191,11 @@ public void DrawBitMapForInputOfEachCycle(int[,] twoDimArrayofInput, double inpu
             double stabilityPercentageOfCycle = ((double)count2 / lengthoftotalinputs) * 100;
             Debug.WriteLine($"{stabilityPercentageOfCycle}% stable");
         }
+        /// <summary>
+        /// printing of columns for which inputs will be activated
+        /// </summary>
+        /// <param name="inputofSDRspercycle"></param>
+        /// <param name="numColumns"></param>
         public void PrintingAllTheColumnOfWhichInputsWillBeActivated(Dictionary<double, List<int[]>> inputofSDRspercycle, int numColumns)
         {
             Dictionary<double, int[]> finalSDRofAllInputs = new Dictionary<double, int[]>();
@@ -221,6 +226,10 @@ public void DrawBitMapForInputOfEachCycle(int[,] twoDimArrayofInput, double inpu
                 Debug.WriteLine($"{i} : {Helpers.StringifyVector(values)}");
             }
         }
+        /// <summary>
+        /// Generated bitmaps for connected input bits for each column
+        /// </summary>
+        /// <param name="mem"></param>
         public void DrawBitMapOfConnectedInputBitsForColumns(Connections mem)
         {
             SpatialPooler sp = new SpatialPooler();
