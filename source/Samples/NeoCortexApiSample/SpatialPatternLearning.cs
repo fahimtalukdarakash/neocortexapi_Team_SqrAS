@@ -18,7 +18,7 @@ namespace NeoCortexApiSample
     /// Implements an experiment that demonstrates how to learn spatial patterns.
     /// SP will learn every presented input in multiple iterations.
     /// </summary>
-    public class SpatialPatternLearning
+    public class SpatialPatternLearning : SPLHelpers
     {
         public void Run()
         {
